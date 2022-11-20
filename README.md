@@ -25,6 +25,7 @@ collaboflow-rs = ""
 
 - [getDocumentOverview](http://docs.collaboflow.com/api-docs/#/Document/getDocumentOverview)
 - [getDeterms](http://docs.collaboflow.com/api-docs/#/Document/getDeterms)
+- [getDocumentContents](http://docs.collaboflow.com/api-docs/#/Document/getDocumentContents)
 
 ### MyStatus
 
