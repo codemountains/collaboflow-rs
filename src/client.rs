@@ -1,4 +1,5 @@
 use crate::authorization::CollaboflowAuthorization;
+use crate::client::document::document_contents::DocumentContents;
 use crate::client::document::document_determs::DocumentDeterms;
 use crate::client::document::documents::Documents;
 use crate::client::mystatus::mydeterms::MyDeterms;
@@ -13,6 +14,7 @@ mod query_params;
 pub struct CollaboflowClient {
     pub documents: Documents,
     pub document_determs: DocumentDeterms,
+    pub document_contents: DocumentContents,
     pub mydeterms: MyDeterms,
     pub myrequests: MyRequests,
     pub mydrafts: MyDrafts,
@@ -26,6 +28,7 @@ impl CollaboflowClient {
         // Document
         let documents = Documents::new(base_url, authorization_header);
         let document_determs = DocumentDeterms::new(base_url, authorization_header);
+        let document_contents = DocumentContents::new(base_url, authorization_header);
 
         // MyStatus
         let mydeterms = MyDeterms::new(base_url, authorization_header);
@@ -36,6 +39,7 @@ impl CollaboflowClient {
         Self {
             documents,
             document_determs,
+            document_contents,
             mydeterms,
             myrequests,
             mydrafts,
