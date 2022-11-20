@@ -27,6 +27,10 @@ collaboflow-rs = ""
 - [getDeterms](http://docs.collaboflow.com/api-docs/#/Document/getDeterms)
 - [getDocumentContents](http://docs.collaboflow.com/api-docs/#/Document/getDocumentContents)
 
+### Form
+
+- [getForms](http://docs.collaboflow.com/api-docs/#/Form/getForms)
+
 ### MyStatus
 
 - [getMyDeterms](http://docs.collaboflow.com/api-docs/#/MyStatus/getMyDeterms)
