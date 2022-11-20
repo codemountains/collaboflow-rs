@@ -193,4 +193,21 @@ mod tests {
         let resp = client.myprocesses.get(query_params).await;
         assert_eq!(true, resp.is_ok());
     }
+
+    #[tokio::test]
+    async fn forms_works() {
+        let mut query_params = HashMap::new();
+        query_params.insert("app_cd".to_string(), "1".to_string());
+
+        let client = client_new_by_api_key();
+        let resp = client.forms.get(query_params).await;
+        assert_eq!(true, resp.is_ok());
+
+        let mut query_params = HashMap::new();
+        query_params.insert("app_cd".to_string(), "1".to_string());
+
+        let client = client_new_by_password();
+        let resp = client.forms.get(query_params).await;
+        assert_eq!(true, resp.is_ok());
+    }
 }
