@@ -16,10 +16,17 @@ The driver is available on [crates.io](https://crates.io/). To use the driver in
 
 ```toml
 [dependencies]
-collaboflow_rs = ""
+collaboflow-rs = ""
 ```
 
 ## Support APIs
+
+### Document
+
+- [getDocumentOverview](http://docs.collaboflow.com/api-docs/#/Document/getDocumentOverview)
+- [getDeterms](http://docs.collaboflow.com/api-docs/#/Document/getDeterms)
+
+### MyStatus
 
 - [getMyDeterms](http://docs.collaboflow.com/api-docs/#/MyStatus/getMyDeterms)
 - [getMyRequests](http://docs.collaboflow.com/api-docs/#/MyStatus/getMyRequests)
