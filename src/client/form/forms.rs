@@ -58,11 +58,7 @@ impl Forms {
         &self,
         query_params: HashMap<String, String>,
     ) -> anyhow::Result<GetFormsResponse> {
-        let request_url = format!(
-            "{}?{}",
-            &self.url,
-            query_string(query_params)
-        );
+        let request_url = format!("{}?{}", &self.url, query_string(query_params));
 
         let http_client = reqwest::Client::new();
         let resp = http_client
