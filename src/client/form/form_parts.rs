@@ -1,5 +1,5 @@
-use crate::client::error_response::{ErrorResponse, ErrorResponseBody};
 use crate::client::query_params::query_string;
+use crate::response::error::{ErrorResponse, ErrorResponseBody};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use std::collections::HashMap;
