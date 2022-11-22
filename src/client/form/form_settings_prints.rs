@@ -1,35 +1,21 @@
 use crate::client::query_params::query_string;
 use crate::response::error::{ErrorResponse, ErrorResponseBody};
-use serde::{Deserialize, Serialize};
-use serde_json::Value;
+use crate::response::form::form_settings_prints::{
+    GetFormSettingsPrintsResponse, GetFormSettingsPrintsResponseBody,
+};
 use std::collections::HashMap;
 
 const RESOURCE: &str = "forms";
 const NESTED_RESOURCE: &str = "versions";
-const LAST_RESOURCE: &str = "parts";
+const LAST_RESOURCE: &str = "settings/prints";
 const HEADER_KEY: &str = "X-Collaboflow-Authorization";
 
-pub struct FormParts {
+pub struct FormSettingsPrints {
     url: String,
     authorization_header: String,
 }
 
-#[derive(Debug, Deserialize, Clone, Serialize)]
-pub struct GetFormPartsResponse {
-    pub status: u16,
-    pub body: GetFormPartsResponseBody,
-}
-
-#[derive(Debug, Deserialize, Clone, Serialize)]
-pub struct GetFormPartsResponseBody {
-    pub app_cd: i32,
-    pub version: i32,
-    pub total_count: i32,
-    pub error: bool,
-    pub parts: Value,
-}
-
-impl FormParts {
+impl FormSettingsPrints {
     pub fn new(url: &str, authorization_header: &str) -> Self {
         Self {
             url: url.to_string() + RESOURCE,
@@ -42,7 +28,7 @@ impl FormParts {
         form_id: i32,
         form_version: i32,
         query_params: HashMap<String, String>,
-    ) -> Result<GetFormPartsResponse, ErrorResponse> {
+    ) -> Result<GetFormSettingsPrintsResponse, ErrorResponse> {
         let request_url = format!(
             "{}/{}/{}/{}/{}?{}",
             &self.url,
@@ -65,8 +51,8 @@ impl FormParts {
                 let status = resp.status().as_u16();
 
                 if status == 200 {
-                    match resp.json::<GetFormPartsResponseBody>().await {
-                        Ok(body) => Ok(GetFormPartsResponse { status, body }),
+                    match resp.json::<GetFormSettingsPrintsResponseBody>().await {
+                        Ok(body) => Ok(GetFormSettingsPrintsResponse { status, body }),
                         Err(err) => {
                             let body = ErrorResponseBody {
                                 error: true,

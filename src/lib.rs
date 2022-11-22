@@ -1,5 +1,6 @@
 mod authorization;
 mod client;
+pub mod response;
 
 pub use authorization::AuthorizationType;
 pub use authorization::CollaboflowAuthorization;
@@ -17,7 +18,10 @@ mod tests {
     const USER_ID: &str = "USER_ID";
     const USER_PASSWORD: &str = "USER_PASSWORD";
     const API_KEY: &str = "API_KEY";
+    const APP_CD: &str = "APP_CD";
     const DOCUMENT_ID: &str = "DOCUMENT_ID";
+    const FORM_ID: &str = "FORM_ID";
+    const FORM_VERSION: &str = "FORM_VERSION";
 
     fn client_new(auth: AuthorizationType) -> CollaboflowClient {
         dotenv().ok();
@@ -53,14 +57,36 @@ mod tests {
         client_new(AuthorizationType::Password)
     }
 
+    fn app_cd() -> String {
+        dotenv().ok();
+        env::var(APP_CD).expect(format!("{} is undefined.", APP_CD).as_str())
+    }
+
     fn document_id() -> i32 {
         dotenv().ok();
-        let document_id = env::var(DOCUMENT_ID)
+        env::var(DOCUMENT_ID)
             .expect(format!("{} is undefined.", DOCUMENT_ID).as_str())
             .as_str()
             .parse::<i32>()
-            .expect(format!("{} is not a number.", DOCUMENT_ID).as_str());
-        document_id
+            .expect(format!("{} is not a number.", DOCUMENT_ID).as_str())
+    }
+
+    fn form_id() -> i32 {
+        dotenv().ok();
+        env::var(FORM_ID)
+            .expect(format!("{} is undefined.", FORM_ID).as_str())
+            .as_str()
+            .parse::<i32>()
+            .expect(format!("{} is not a number.", FORM_ID).as_str())
+    }
+
+    fn form_version() -> i32 {
+        dotenv().ok();
+        env::var(FORM_VERSION)
+            .expect(format!("{} is undefined.", FORM_VERSION).as_str())
+            .as_str()
+            .parse::<i32>()
+            .expect(format!("{} is not a number.", FORM_VERSION).as_str())
     }
 
     #[tokio::test]
@@ -225,6 +251,32 @@ mod tests {
 
         let client = client_new_by_password();
         let resp = client.form_parts.get(32, 1, query_params).await;
+        assert_eq!(true, resp.is_ok());
+    }
+
+    #[tokio::test]
+    async fn form_settings_prints_works() {
+        let form_id = form_id();
+        let form_version = form_version();
+
+        let mut query_params = HashMap::new();
+        query_params.insert("app_cd".to_string(), app_cd());
+
+        let client = client_new_by_api_key();
+        let resp = client
+            .form_settings_prints
+            .get(form_id, form_version, query_params)
+            .await;
+        assert_eq!(true, resp.is_ok());
+
+        let mut query_params = HashMap::new();
+        query_params.insert("app_cd".to_string(), app_cd());
+
+        let client = client_new_by_password();
+        let resp = client
+            .form_settings_prints
+            .get(form_id, form_version, query_params)
+            .await;
         assert_eq!(true, resp.is_ok());
     }
 }

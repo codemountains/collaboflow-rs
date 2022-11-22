@@ -31,6 +31,7 @@ collaboflow-rs = ""
 
 - [getForms](http://docs.collaboflow.com/api-docs/#/Form/getForms)
 - [getFormParts](http://docs.collaboflow.com/api-docs/#/Form/getFormParts)
+- [getFormSettingsPrints](http://docs.collaboflow.com/api-docs/#/Form/getFormSettingsPrints)
 
 ### MyStatus
 
