@@ -240,14 +240,14 @@ mod tests {
     #[tokio::test]
     async fn form_parts_works() {
         let mut query_params = HashMap::new();
-        query_params.insert("app_cd".to_string(), "1".to_string());
+        query_params.insert("app_cd".to_string(), app_cd());
 
         let client = client_new_by_api_key();
         let resp = client.form_parts.get(32, 1, query_params).await;
         assert_eq!(true, resp.is_ok());
 
         let mut query_params = HashMap::new();
-        query_params.insert("app_cd".to_string(), "1".to_string());
+        query_params.insert("app_cd".to_string(), app_cd());
 
         let client = client_new_by_password();
         let resp = client.form_parts.get(32, 1, query_params).await;
