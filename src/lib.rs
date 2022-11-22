@@ -239,18 +239,27 @@ mod tests {
 
     #[tokio::test]
     async fn form_parts_works() {
+        let form_id = form_id();
+        let form_version = form_version();
+
         let mut query_params = HashMap::new();
         query_params.insert("app_cd".to_string(), app_cd());
 
         let client = client_new_by_api_key();
-        let resp = client.form_parts.get(32, 1, query_params).await;
+        let resp = client
+            .form_parts
+            .get(form_id, form_version, query_params)
+            .await;
         assert_eq!(true, resp.is_ok());
 
         let mut query_params = HashMap::new();
         query_params.insert("app_cd".to_string(), app_cd());
 
         let client = client_new_by_password();
-        let resp = client.form_parts.get(32, 1, query_params).await;
+        let resp = client
+            .form_parts
+            .get(form_id, form_version, query_params)
+            .await;
         assert_eq!(true, resp.is_ok());
     }
 
