@@ -1,4 +1,4 @@
-use crate::client::query_params::query_string;
+use crate::client::query::query_string;
 use anyhow::anyhow;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
