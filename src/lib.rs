@@ -55,12 +55,11 @@ mod tests {
 
     fn document_id() -> i32 {
         dotenv().ok();
-        let document_id = env::var(DOCUMENT_ID)
+        env::var(DOCUMENT_ID)
             .expect(format!("{} is undefined.", DOCUMENT_ID).as_str())
             .as_str()
             .parse::<i32>()
-            .expect(format!("{} is not a number.", DOCUMENT_ID).as_str());
-        document_id
+            .expect(format!("{} is not a number.", DOCUMENT_ID).as_str())
     }
 
     #[tokio::test]
