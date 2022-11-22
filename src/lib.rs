@@ -94,14 +94,14 @@ mod tests {
         let document_id = document_id();
 
         let mut query_params = HashMap::new();
-        query_params.insert("app_cd".to_string(), "1".to_string());
+        query_params.insert("app_cd".to_string(), app_cd());
 
         let client = client_new_by_api_key();
         let resp = client.documents.get(document_id, query_params).await;
         assert_eq!(true, resp.is_ok());
 
         let mut query_params = HashMap::new();
-        query_params.insert("app_cd".to_string(), "1".to_string());
+        query_params.insert("app_cd".to_string(), app_cd());
 
         let client = client_new_by_password();
         let resp = client.documents.get(document_id, query_params).await;
@@ -113,14 +113,14 @@ mod tests {
         let document_id = document_id();
 
         let mut query_params = HashMap::new();
-        query_params.insert("app_cd".to_string(), "1".to_string());
+        query_params.insert("app_cd".to_string(), app_cd());
 
         let client = client_new_by_api_key();
         let resp = client.document_determs.get(document_id, query_params).await;
         assert_eq!(true, resp.is_ok());
 
         let mut query_params = HashMap::new();
-        query_params.insert("app_cd".to_string(), "1".to_string());
+        query_params.insert("app_cd".to_string(), app_cd());
 
         let client = client_new_by_password();
         let resp = client.document_determs.get(document_id, query_params).await;
@@ -132,7 +132,7 @@ mod tests {
         let document_id = document_id();
 
         let mut query_params = HashMap::new();
-        query_params.insert("app_cd".to_string(), "1".to_string());
+        query_params.insert("app_cd".to_string(), app_cd());
 
         let client = client_new_by_api_key();
         let resp = client
@@ -142,7 +142,7 @@ mod tests {
         assert_eq!(true, resp.is_ok());
 
         let mut query_params = HashMap::new();
-        query_params.insert("app_cd".to_string(), "1".to_string());
+        query_params.insert("app_cd".to_string(), app_cd());
 
         let client = client_new_by_password();
         let resp = client
@@ -155,14 +155,14 @@ mod tests {
     #[tokio::test]
     async fn mydeterms_works() {
         let mut query_params = HashMap::new();
-        query_params.insert("app_cd".to_string(), "1".to_string());
+        query_params.insert("app_cd".to_string(), app_cd());
 
         let client = client_new_by_api_key();
         let resp = client.mydeterms.get(query_params).await;
         assert_eq!(true, resp.is_ok());
 
         let mut query_params = HashMap::new();
-        query_params.insert("app_cd".to_string(), "1".to_string());
+        query_params.insert("app_cd".to_string(), app_cd());
 
         let client = client_new_by_password();
         let resp = client.mydeterms.get(query_params).await;
@@ -172,14 +172,14 @@ mod tests {
     #[tokio::test]
     async fn myrequests_works() {
         let mut query_params = HashMap::new();
-        query_params.insert("app_cd".to_string(), "1".to_string());
+        query_params.insert("app_cd".to_string(), app_cd());
 
         let client = client_new_by_api_key();
         let resp = client.myrequests.get(query_params).await;
         assert_eq!(true, resp.is_ok());
 
         let mut query_params = HashMap::new();
-        query_params.insert("app_cd".to_string(), "1".to_string());
+        query_params.insert("app_cd".to_string(), app_cd());
 
         let client = client_new_by_password();
         let resp = client.myrequests.get(query_params).await;
@@ -189,14 +189,14 @@ mod tests {
     #[tokio::test]
     async fn mydrafts_works() {
         let mut query_params = HashMap::new();
-        query_params.insert("app_cd".to_string(), "1".to_string());
+        query_params.insert("app_cd".to_string(), app_cd());
 
         let client = client_new_by_api_key();
         let resp = client.mydrafts.get(query_params).await;
         assert_eq!(true, resp.is_ok());
 
         let mut query_params = HashMap::new();
-        query_params.insert("app_cd".to_string(), "1".to_string());
+        query_params.insert("app_cd".to_string(), app_cd());
 
         let client = client_new_by_password();
         let resp = client.mydrafts.get(query_params).await;
@@ -206,14 +206,14 @@ mod tests {
     #[tokio::test]
     async fn myprocesses_works() {
         let mut query_params = HashMap::new();
-        query_params.insert("app_cd".to_string(), "1".to_string());
+        query_params.insert("app_cd".to_string(), app_cd());
 
         let client = client_new_by_api_key();
         let resp = client.myprocesses.get(query_params).await;
         assert_eq!(true, resp.is_ok());
 
         let mut query_params = HashMap::new();
-        query_params.insert("app_cd".to_string(), "1".to_string());
+        query_params.insert("app_cd".to_string(), app_cd());
 
         let client = client_new_by_password();
         let resp = client.myprocesses.get(query_params).await;
@@ -223,14 +223,14 @@ mod tests {
     #[tokio::test]
     async fn forms_works() {
         let mut query_params = HashMap::new();
-        query_params.insert("app_cd".to_string(), "1".to_string());
+        query_params.insert("app_cd".to_string(), app_cd());
 
         let client = client_new_by_api_key();
         let resp = client.forms.get(query_params).await;
         assert_eq!(true, resp.is_ok());
 
         let mut query_params = HashMap::new();
-        query_params.insert("app_cd".to_string(), "1".to_string());
+        query_params.insert("app_cd".to_string(), app_cd());
 
         let client = client_new_by_password();
         let resp = client.forms.get(query_params).await;
@@ -239,18 +239,27 @@ mod tests {
 
     #[tokio::test]
     async fn form_parts_works() {
+        let form_id = form_id();
+        let form_version = form_version();
+
         let mut query_params = HashMap::new();
-        query_params.insert("app_cd".to_string(), "1".to_string());
+        query_params.insert("app_cd".to_string(), app_cd());
 
         let client = client_new_by_api_key();
-        let resp = client.form_parts.get(32, 1, query_params).await;
+        let resp = client
+            .form_parts
+            .get(form_id, form_version, query_params)
+            .await;
         assert_eq!(true, resp.is_ok());
 
         let mut query_params = HashMap::new();
-        query_params.insert("app_cd".to_string(), "1".to_string());
+        query_params.insert("app_cd".to_string(), app_cd());
 
         let client = client_new_by_password();
-        let resp = client.form_parts.get(32, 1, query_params).await;
+        let resp = client
+            .form_parts
+            .get(form_id, form_version, query_params)
+            .await;
         assert_eq!(true, resp.is_ok());
     }
 
