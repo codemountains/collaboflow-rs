@@ -27,18 +27,22 @@ collaboflow-rs = ""
 - [getDeterms](http://docs.collaboflow.com/api-docs/#/Document/getDeterms)
 - [getDocumentContents](http://docs.collaboflow.com/api-docs/#/Document/getDocumentContents)
 
-### Form
-
-- [getForms](http://docs.collaboflow.com/api-docs/#/Form/getForms)
-- [getFormParts](http://docs.collaboflow.com/api-docs/#/Form/getFormParts)
-- [getFormSettingsPrints](http://docs.collaboflow.com/api-docs/#/Form/getFormSettingsPrints)
-
 ### MyStatus
 
 - [getMyDeterms](http://docs.collaboflow.com/api-docs/#/MyStatus/getMyDeterms)
 - [getMyRequests](http://docs.collaboflow.com/api-docs/#/MyStatus/getMyRequests)
 - [getMyDrafts](http://docs.collaboflow.com/api-docs/#/MyStatus/getMyDrafts)
 - [getMyProcesses](http://docs.collaboflow.com/api-docs/#/MyStatus/getMyProcesses)
+
+### Form
+
+- [getForms](http://docs.collaboflow.com/api-docs/#/Form/getForms)
+- [getFormParts](http://docs.collaboflow.com/api-docs/#/Form/getFormParts)
+- [getFormSettingsPrints](http://docs.collaboflow.com/api-docs/#/Form/getFormSettingsPrints)
+
+### User
+
+- [getUsers](http://docs.collaboflow.com/api-docs/#/User/getUsers)
 
 ## LICENSE
 

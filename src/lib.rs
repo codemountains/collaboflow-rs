@@ -288,4 +288,19 @@ mod tests {
             .await;
         assert_eq!(true, resp.is_ok());
     }
+
+    #[tokio::test]
+    async fn users_works() {
+        let query_params = HashMap::new();
+
+        let client = client_new_by_api_key();
+        let resp = client.users.get(query_params).await;
+        assert_eq!(true, resp.is_ok());
+
+        let query_params = HashMap::new();
+
+        let client = client_new_by_password();
+        let resp = client.users.get(query_params).await;
+        assert_eq!(true, resp.is_ok());
+    }
 }

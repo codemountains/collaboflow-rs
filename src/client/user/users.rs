@@ -1,35 +1,17 @@
 use crate::client::query::query_string;
+use crate::client::HEADER_KEY;
 use crate::response::error::{ErrorResponse, ErrorResponseBody};
-use serde::{Deserialize, Serialize};
-use serde_json::Value;
+use crate::response::user::users::{GetUsersResponse, GetUsersResponseBody};
 use std::collections::HashMap;
 
-const RESOURCE: &str = "forms";
-const NESTED_RESOURCE: &str = "versions";
-const LAST_RESOURCE: &str = "parts";
-const HEADER_KEY: &str = "X-Collaboflow-Authorization";
+const RESOURCE: &str = "users";
 
-pub struct FormParts {
+pub struct Users {
     url: String,
     authorization_header: String,
 }
 
-#[derive(Debug, Deserialize, Clone, Serialize)]
-pub struct GetFormPartsResponse {
-    pub status: u16,
-    pub body: GetFormPartsResponseBody,
-}
-
-#[derive(Debug, Deserialize, Clone, Serialize)]
-pub struct GetFormPartsResponseBody {
-    pub app_cd: i32,
-    pub version: i32,
-    pub total_count: i32,
-    pub error: bool,
-    pub parts: Value,
-}
-
-impl FormParts {
+impl Users {
     pub fn new(url: &str, authorization_header: &str) -> Self {
         Self {
             url: url.to_string() + RESOURCE,
@@ -39,19 +21,9 @@ impl FormParts {
 
     pub async fn get(
         &self,
-        form_id: i32,
-        form_version: i32,
         query_params: HashMap<String, String>,
-    ) -> Result<GetFormPartsResponse, ErrorResponse> {
-        let request_url = format!(
-            "{}/{}/{}/{}/{}?{}",
-            &self.url,
-            form_id,
-            NESTED_RESOURCE,
-            form_version,
-            LAST_RESOURCE,
-            query_string(query_params)
-        );
+    ) -> Result<GetUsersResponse, ErrorResponse> {
+        let request_url = format!("{}?{}", &self.url, query_string(query_params));
 
         let http_client = reqwest::Client::new();
         let result = http_client
@@ -65,8 +37,8 @@ impl FormParts {
                 let status = resp.status().as_u16();
 
                 if status == 200 {
-                    match resp.json::<GetFormPartsResponseBody>().await {
-                        Ok(body) => Ok(GetFormPartsResponse { status, body }),
+                    match resp.json::<GetUsersResponseBody>().await {
+                        Ok(body) => Ok(GetUsersResponse { status, body }),
                         Err(err) => {
                             let body = ErrorResponseBody {
                                 error: true,
