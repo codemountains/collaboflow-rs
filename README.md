@@ -43,6 +43,7 @@ collaboflow-rs = ""
 ### User
 
 - [getUsers](http://docs.collaboflow.com/api-docs/#/User/getUsers)
+- [getUser](http://docs.collaboflow.com/api-docs/#/User/getUser)
 
 ## LICENSE
 

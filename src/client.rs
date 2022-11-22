@@ -9,6 +9,7 @@ use crate::client::mystatus::mydeterms::MyDeterms;
 use crate::client::mystatus::mydrafts::MyDrafts;
 use crate::client::mystatus::myprocesses::MyProcesses;
 use crate::client::mystatus::myrequests::MyRequests;
+use crate::client::user::user::User;
 use crate::client::user::users::Users;
 
 pub mod document;
@@ -31,6 +32,7 @@ pub struct CollaboflowClient {
     pub form_parts: FormParts,
     pub form_settings_prints: FormSettingsPrints,
     pub users: Users,
+    pub user: User,
 }
 
 impl CollaboflowClient {
@@ -55,6 +57,7 @@ impl CollaboflowClient {
 
         // User
         let users = Users::new(base_url, authorization_header);
+        let user = User::new(base_url, authorization_header);
 
         Self {
             documents,
@@ -68,6 +71,7 @@ impl CollaboflowClient {
             form_parts,
             form_settings_prints,
             users,
+            user,
         }
     }
 }
