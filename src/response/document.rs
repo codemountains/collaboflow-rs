@@ -1,6 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 pub mod document_contents;
+pub mod document_determs;
 pub mod documents;
 
 #[derive(Debug, Deserialize, Clone, Serialize)]

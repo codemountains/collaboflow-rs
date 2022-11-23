@@ -1,7 +1,7 @@
 use crate::query::query_string;
-use anyhow::anyhow;
-use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
+use crate::response::document::document_determs::{GetDocumentDetermsResponse, GetDocumentDetermsResponseBody};
+use crate::response::error::{ErrorResponse, ErrorResponseBody};
 
 const RESOURCE: &str = "documents";
 const NESTED_RESOURCE: &str = "determs";
@@ -10,33 +10,6 @@ const HEADER_KEY: &str = "X-Collaboflow-Authorization";
 pub struct DocumentDeterms {
     url: String,
     authorization_header: String,
-}
-
-#[derive(Debug, Deserialize, Clone, Serialize)]
-pub struct GetDocumentDetermsResponse {
-    pub app_cd: i32,
-    pub offset: i32,
-    pub limit: i32,
-    pub total_count: i32,
-    pub error: bool,
-    pub records: Vec<DetermRecord>,
-}
-
-#[derive(Debug, Deserialize, Clone, Serialize)]
-pub struct DetermRecord {
-    pub current: bool,
-    pub comment: String,
-    pub determ_date: String,
-    pub determ_titlename: String,
-    pub determ_usercd: String,
-    pub determ_username: String,
-    pub determ_status: String,
-    pub document_id: i32,
-    pub document_number: String,
-    pub phase_number: i32,
-    pub phase_title: String,
-    pub represent_username: String,
-    pub represent_usercd: String,
 }
 
 impl DocumentDeterms {
@@ -51,7 +24,7 @@ impl DocumentDeterms {
         &self,
         document_id: i32,
         query_params: HashMap<String, String>,
-    ) -> anyhow::Result<GetDocumentDetermsResponse> {
+    ) -> Result<GetDocumentDetermsResponse, ErrorResponse> {
         let request_url = format!(
             "{}/{}/{}?{}",
             &self.url,
@@ -61,15 +34,53 @@ impl DocumentDeterms {
         );
 
         let http_client = reqwest::Client::new();
-        let resp = http_client
+        let result = http_client
             .get(request_url)
             .header(HEADER_KEY, &self.authorization_header)
             .send()
-            .await?;
+            .await;
 
-        match resp.json::<GetDocumentDetermsResponse>().await {
-            Ok(document) => Ok(document),
-            Err(err) => Err(anyhow!(err)),
+        match result {
+            Ok(resp) => {
+                let status = resp.status().as_u16();
+
+                if status == 200 {
+                    match resp.json::<GetDocumentDetermsResponseBody>().await {
+                        Ok(body) => Ok(GetDocumentDetermsResponse { status, body }),
+                        Err(err) => {
+                            let body = ErrorResponseBody {
+                                error: true,
+                                messages: vec![err.to_string()],
+                            };
+                            let error_response = ErrorResponse { status, body };
+                            Err(error_response)
+                        }
+                    }
+                } else {
+                    match resp.json::<ErrorResponseBody>().await {
+                        Ok(body) => {
+                            let error_response = ErrorResponse { status, body };
+                            Err(error_response)
+                        }
+                        Err(err) => {
+                            let body = ErrorResponseBody {
+                                error: true,
+                                messages: vec![err.to_string()],
+                            };
+                            let error_response = ErrorResponse { status, body };
+                            Err(error_response)
+                        }
+                    }
+                }
+            }
+            Err(err) => {
+                let body = ErrorResponseBody {
+                    error: true,
+                    messages: vec![err.to_string()],
+                };
+                let error_response = ErrorResponse { status: 500, body };
+                Err(error_response)
+            }
         }
     }
 }
