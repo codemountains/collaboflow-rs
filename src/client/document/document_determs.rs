@@ -1,7 +1,9 @@
 use crate::query::query_string;
-use std::collections::HashMap;
-use crate::response::document::document_determs::{GetDocumentDetermsResponse, GetDocumentDetermsResponseBody};
+use crate::response::document::document_determs::{
+    GetDocumentDetermsResponse, GetDocumentDetermsResponseBody,
+};
 use crate::response::error::{ErrorResponse, ErrorResponseBody};
+use std::collections::HashMap;
 
 const RESOURCE: &str = "documents";
 const NESTED_RESOURCE: &str = "determs";
