@@ -1,4 +1,5 @@
 use serde::{Deserialize, Serialize};
+use crate::response::document::RequestTitle;
 
 #[derive(Debug, Deserialize, Clone, Serialize)]
 pub struct GetDocumentsResponse {
@@ -25,11 +26,4 @@ pub struct GetDocumentsResponseBody {
     pub end_date: String,
     pub link: String,
     pub error: bool,
-}
-
-#[derive(Debug, Deserialize, Clone, Serialize)]
-pub struct RequestTitle {
-    pub id: String,
-    pub code: String,
-    pub name: String,
 }
