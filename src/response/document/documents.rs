@@ -2,6 +2,12 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Deserialize, Clone, Serialize)]
 pub struct GetDocumentsResponse {
+    pub status: u16,
+    pub body: GetDocumentsResponseBody,
+}
+
+#[derive(Debug, Deserialize, Clone, Serialize)]
+pub struct GetDocumentsResponseBody {
     pub app_cd: i32,
     pub processes_id: i32,
     pub document_id: i32,

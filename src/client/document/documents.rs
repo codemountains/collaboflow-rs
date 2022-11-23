@@ -1,10 +1,10 @@
+use crate::client::HEADER_KEY;
 use crate::query::query_string;
-use anyhow::anyhow;
+use crate::response::document::documents::{GetDocumentsResponse, GetDocumentsResponseBody};
+use crate::response::error::{ErrorResponse, ErrorResponseBody};
 use std::collections::HashMap;
-use crate::response::document::documents::GetDocumentsResponse;
 
 const RESOURCE: &str = "documents";
-const HEADER_KEY: &str = "X-Collaboflow-Authorization";
 
 pub struct Documents {
     url: String,
@@ -23,7 +23,7 @@ impl Documents {
         &self,
         document_id: i32,
         query_params: HashMap<String, String>,
-    ) -> anyhow::Result<GetDocumentsResponse> {
+    ) -> Result<GetDocumentsResponse, ErrorResponse> {
         let request_url = format!(
             "{}/{}?{}",
             &self.url,
@@ -32,15 +32,53 @@ impl Documents {
         );
 
         let http_client = reqwest::Client::new();
-        let resp = http_client
+        let result = http_client
             .get(request_url)
             .header(HEADER_KEY, &self.authorization_header)
             .send()
-            .await?;
+            .await;
 
-        match resp.json::<GetDocumentsResponse>().await {
-            Ok(document) => Ok(document),
-            Err(err) => Err(anyhow!(err)),
+        match result {
+            Ok(resp) => {
+                let status = resp.status().as_u16();
+
+                if status == 200 {
+                    match resp.json::<GetDocumentsResponseBody>().await {
+                        Ok(body) => Ok(GetDocumentsResponse { status, body }),
+                        Err(err) => {
+                            let body = ErrorResponseBody {
+                                error: true,
+                                messages: vec![err.to_string()],
+                            };
+                            let error_response = ErrorResponse { status, body };
+                            Err(error_response)
+                        }
+                    }
+                } else {
+                    match resp.json::<ErrorResponseBody>().await {
+                        Ok(body) => {
+                            let error_response = ErrorResponse { status, body };
+                            Err(error_response)
+                        }
+                        Err(err) => {
+                            let body = ErrorResponseBody {
+                                error: true,
+                                messages: vec![err.to_string()],
+                            };
+                            let error_response = ErrorResponse { status, body };
+                            Err(error_response)
+                        }
+                    }
+                }
+            }
+            Err(err) => {
+                let body = ErrorResponseBody {
+                    error: true,
+                    messages: vec![err.to_string()],
+                };
+                let error_response = ErrorResponse { status: 500, body };
+                Err(error_response)
+            }
         }
     }
 }
