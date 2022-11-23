@@ -1,4 +1,4 @@
-use crate::response::document::{RepresentUser, RequestGroup, RequestTitle, RequestUser};
+use crate::response::{RepresentUser, RequestGroup, RequestTitle, RequestUser};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
