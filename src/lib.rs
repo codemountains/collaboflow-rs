@@ -24,6 +24,7 @@ mod tests {
     const FORM_VERSION: &str = "FORM_VERSION";
     const USER_UNIQUE_ID: &str = "USER_UNIQUE_ID";
     const GROUP_ID: &str = "GROUP_ID";
+    const TITLE_ID: &str = "TITLE_ID";
 
     fn client_new(auth: AuthorizationType) -> CollaboflowClient {
         dotenv().ok();
@@ -99,6 +100,11 @@ mod tests {
     fn group_id() -> String {
         dotenv().ok();
         env::var(GROUP_ID).expect(format!("{} is undefined.", GROUP_ID).as_str())
+    }
+
+    fn title_id() -> String {
+        dotenv().ok();
+        env::var(TITLE_ID).expect(format!("{} is undefined.", TITLE_ID).as_str())
     }
 
     #[tokio::test]
@@ -375,6 +381,23 @@ mod tests {
 
         let client = client_new_by_password();
         let resp = client.titles.get(query_params).await;
+        assert_eq!(true, resp.is_ok());
+    }
+
+    #[tokio::test]
+    async fn title_works() {
+        let title_id = title_id();
+
+        let query_params = HashMap::new();
+
+        let client = client_new_by_api_key();
+        let resp = client.title.get(&title_id, query_params).await;
+        assert_eq!(true, resp.is_ok());
+
+        let query_params = HashMap::new();
+
+        let client = client_new_by_password();
+        let resp = client.title.get(&title_id, query_params).await;
         assert_eq!(true, resp.is_ok());
     }
 }

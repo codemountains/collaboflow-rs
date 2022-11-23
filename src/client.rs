@@ -11,6 +11,7 @@ use crate::client::mystatus::mydeterms::MyDeterms;
 use crate::client::mystatus::mydrafts::MyDrafts;
 use crate::client::mystatus::myprocesses::MyProcesses;
 use crate::client::mystatus::myrequests::MyRequests;
+use crate::client::title::title::Title;
 use crate::client::title::titles::Titles;
 use crate::client::user::user::User;
 use crate::client::user::users::Users;
@@ -41,6 +42,7 @@ pub struct CollaboflowClient {
     pub groups: Groups,
     pub group: Group,
     pub titles: Titles,
+    pub title: Title,
 }
 
 impl CollaboflowClient {
@@ -73,6 +75,7 @@ impl CollaboflowClient {
 
         // Title
         let titles = Titles::new(base_url, authorization_header);
+        let title = Title::new(base_url, authorization_header);
 
         Self {
             documents,
@@ -90,6 +93,7 @@ impl CollaboflowClient {
             groups,
             group,
             titles,
+            title,
         }
     }
 }
