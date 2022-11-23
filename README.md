@@ -50,6 +50,7 @@ collaboflow-rs = ""
 ### Group
 
 - [getGroups](http://docs.collaboflow.com/api-docs/#/Group/getGroups)
+- [getGroup](http://docs.collaboflow.com/api-docs/#/Group/getGroup)
 
 ## LICENSE
 
