@@ -1,63 +1,17 @@
+use crate::client::HEADER_KEY;
 use crate::query::query_string;
-use anyhow::anyhow;
-use serde::{Deserialize, Serialize};
-use serde_json::Value;
+use crate::response::document::document_contents::{
+    GetDocumentContentsResponse, GetDocumentContentsResponseBody,
+};
+use crate::response::error::{ErrorResponse, ErrorResponseBody};
 use std::collections::HashMap;
 
 const RESOURCE: &str = "documents";
 const NESTED_RESOURCE: &str = "contents";
-const HEADER_KEY: &str = "X-Collaboflow-Authorization";
 
 pub struct DocumentContents {
     url: String,
     authorization_header: String,
-}
-
-#[derive(Debug, Deserialize, Clone, Serialize)]
-pub struct GetDocumentContentsResponse {
-    pub app_cd: i32,
-    pub processes_id: i32,
-    pub error: bool,
-    pub document_id: i32,
-    pub document_number: String,
-    pub title: String,
-    pub flow_status: String,
-    pub link: String,
-    pub request_date: String,
-    pub request_group: DocumentContentRequestGroup,
-    pub request_titles: Vec<DocumentContentRequestTitle>,
-    pub request_user: DocumentContentRequestUser,
-    pub represent_user: DocumentContentRepresentUser,
-    pub end_date: String,
-    pub contents: Value,
-}
-
-#[derive(Debug, Deserialize, Clone, Serialize)]
-pub struct DocumentContentRequestGroup {
-    pub id: String,
-    pub code: String,
-    pub name: String,
-}
-
-#[derive(Debug, Deserialize, Clone, Serialize)]
-pub struct DocumentContentRequestTitle {
-    pub id: String,
-    pub code: String,
-    pub name: String,
-}
-
-#[derive(Debug, Deserialize, Clone, Serialize)]
-pub struct DocumentContentRequestUser {
-    pub id: String,
-    pub loginid: String,
-    pub name: String,
-}
-
-#[derive(Debug, Deserialize, Clone, Serialize)]
-pub struct DocumentContentRepresentUser {
-    pub id: String,
-    pub loginid: String,
-    pub name: String,
 }
 
 impl DocumentContents {
@@ -72,7 +26,7 @@ impl DocumentContents {
         &self,
         document_id: i32,
         query_params: HashMap<String, String>,
-    ) -> anyhow::Result<GetDocumentContentsResponse> {
+    ) -> Result<GetDocumentContentsResponse, ErrorResponse> {
         let request_url = format!(
             "{}/{}/{}?{}",
             &self.url,
@@ -82,15 +36,53 @@ impl DocumentContents {
         );
 
         let http_client = reqwest::Client::new();
-        let resp = http_client
+        let result = http_client
             .get(request_url)
             .header(HEADER_KEY, &self.authorization_header)
             .send()
-            .await?;
+            .await;
 
-        match resp.json::<GetDocumentContentsResponse>().await {
-            Ok(document) => Ok(document),
-            Err(err) => Err(anyhow!(err)),
+        match result {
+            Ok(resp) => {
+                let status = resp.status().as_u16();
+
+                if status == 200 {
+                    match resp.json::<GetDocumentContentsResponseBody>().await {
+                        Ok(body) => Ok(GetDocumentContentsResponse { status, body }),
+                        Err(err) => {
+                            let body = ErrorResponseBody {
+                                error: true,
+                                messages: vec![err.to_string()],
+                            };
+                            let error_response = ErrorResponse { status, body };
+                            Err(error_response)
+                        }
+                    }
+                } else {
+                    match resp.json::<ErrorResponseBody>().await {
+                        Ok(body) => {
+                            let error_response = ErrorResponse { status, body };
+                            Err(error_response)
+                        }
+                        Err(err) => {
+                            let body = ErrorResponseBody {
+                                error: true,
+                                messages: vec![err.to_string()],
+                            };
+                            let error_response = ErrorResponse { status, body };
+                            Err(error_response)
+                        }
+                    }
+                }
+            }
+            Err(err) => {
+                let body = ErrorResponseBody {
+                    error: true,
+                    messages: vec![err.to_string()],
+                };
+                let error_response = ErrorResponse { status: 500, body };
+                Err(error_response)
+            }
         }
     }
 }

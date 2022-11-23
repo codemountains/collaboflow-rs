@@ -1,5 +1,5 @@
-use serde::{Deserialize, Serialize};
 use crate::response::document::RequestTitle;
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Deserialize, Clone, Serialize)]
 pub struct GetDocumentsResponse {
