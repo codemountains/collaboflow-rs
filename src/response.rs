@@ -45,3 +45,16 @@ pub struct RepresentUser {
 
 #[derive(Debug, Deserialize, Clone, Serialize, PartialEq, Eq)]
 pub struct EmptyRepresentUser {}
+
+#[derive(Debug, Deserialize, Clone, Serialize)]
+pub struct ProcessCategory {
+    pub id: i32,
+    pub name: String,
+}
+
+#[derive(Debug, Deserialize, Clone, Serialize)]
+pub struct ProcessFrom {
+    pub id: i32,
+    pub name: String,
+    pub r#type: String,
+}
