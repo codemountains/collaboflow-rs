@@ -1,6 +1,8 @@
 use data_encoding::BASE64;
 use std::fmt;
 
+pub const HEADER_KEY: &str = "X-Collaboflow-Authorization";
+
 pub enum AuthorizationType {
     Password,
     ApiKey,

@@ -1,3 +1,4 @@
+use crate::authorization::HEADER_KEY;
 use crate::query::query_string;
 use crate::response::document::document_determs::{
     GetDocumentDetermsResponse, GetDocumentDetermsResponseBody,
@@ -7,7 +8,6 @@ use std::collections::HashMap;
 
 const RESOURCE: &str = "documents";
 const NESTED_RESOURCE: &str = "determs";
-const HEADER_KEY: &str = "X-Collaboflow-Authorization";
 
 pub struct DocumentDeterms {
     url: String,
