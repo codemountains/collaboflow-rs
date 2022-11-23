@@ -362,4 +362,19 @@ mod tests {
         let resp = client.group.get(&group_id, query_params).await;
         assert_eq!(true, resp.is_ok());
     }
+
+    #[tokio::test]
+    async fn titles_works() {
+        let query_params = HashMap::new();
+
+        let client = client_new_by_api_key();
+        let resp = client.titles.get(query_params).await;
+        assert_eq!(true, resp.is_ok());
+
+        let query_params = HashMap::new();
+
+        let client = client_new_by_password();
+        let resp = client.titles.get(query_params).await;
+        assert_eq!(true, resp.is_ok());
+    }
 }
