@@ -1,3 +1,4 @@
+use crate::client::HEADER_KEY;
 use crate::query::query_string;
 use crate::response::error::{ErrorResponse, ErrorResponseBody};
 use crate::response::form::form_settings_prints::{
@@ -8,7 +9,6 @@ use std::collections::HashMap;
 const RESOURCE: &str = "forms";
 const NESTED_RESOURCE: &str = "versions";
 const LAST_RESOURCE: &str = "settings/prints";
-const HEADER_KEY: &str = "X-Collaboflow-Authorization";
 
 pub struct FormSettingsPrints {
     url: String,
