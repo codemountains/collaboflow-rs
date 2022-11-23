@@ -11,6 +11,7 @@ use crate::client::mystatus::mydeterms::MyDeterms;
 use crate::client::mystatus::mydrafts::MyDrafts;
 use crate::client::mystatus::myprocesses::MyProcesses;
 use crate::client::mystatus::myrequests::MyRequests;
+use crate::client::title::titles::Titles;
 use crate::client::user::user::User;
 use crate::client::user::users::Users;
 
@@ -19,6 +20,7 @@ pub mod form;
 pub mod group;
 pub mod mystatus;
 pub mod query;
+pub mod title;
 pub mod user;
 
 pub const HEADER_KEY: &str = "X-Collaboflow-Authorization";
@@ -38,6 +40,7 @@ pub struct CollaboflowClient {
     pub user: User,
     pub groups: Groups,
     pub group: Group,
+    pub titles: Titles,
 }
 
 impl CollaboflowClient {
@@ -68,6 +71,9 @@ impl CollaboflowClient {
         let groups = Groups::new(base_url, authorization_header);
         let group = Group::new(base_url, authorization_header);
 
+        // Title
+        let titles = Titles::new(base_url, authorization_header);
+
         Self {
             documents,
             document_determs,
@@ -83,6 +89,7 @@ impl CollaboflowClient {
             user,
             groups,
             group,
+            titles,
         }
     }
 }

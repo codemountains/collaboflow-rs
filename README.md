@@ -52,6 +52,10 @@ collaboflow-rs = ""
 - [getGroups](http://docs.collaboflow.com/api-docs/#/Group/getGroups)
 - [getGroup](http://docs.collaboflow.com/api-docs/#/Group/getGroup)
 
+### Title
+
+- [getTitles](http://docs.collaboflow.com/api-docs/#/Title/getTitles)
+
 ## LICENSE
 
 This project is licensed under the [MIT license](LICENSE).
