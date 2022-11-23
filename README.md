@@ -18,7 +18,7 @@ To use the driver in your application, simply add it to your project's `Cargo.to
 
 ```toml
 [dependencies]
-collaboflow-rs = ""
+collaboflow-rs = "0.0.1"
 ```
 
 ## Support APIs
