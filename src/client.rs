@@ -23,8 +23,6 @@ pub mod mystatus;
 pub mod title;
 pub mod user;
 
-pub const HEADER_KEY: &str = "X-Collaboflow-Authorization";
-
 pub struct CollaboflowClient {
     pub documents: Documents,
     pub document_determs: DocumentDeterms,

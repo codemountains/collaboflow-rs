@@ -1,4 +1,4 @@
-use crate::client::HEADER_KEY;
+use crate::authorization::HEADER_KEY;
 use crate::query::query_string;
 use crate::response::error::{ErrorResponse, ErrorResponseBody};
 use crate::response::mystatus::mydeterms::{GetMyDetermsResponse, GetMyDetermsResponseBody};

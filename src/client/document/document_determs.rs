@@ -1,4 +1,4 @@
-use crate::client::HEADER_KEY;
+use crate::authorization::HEADER_KEY;
 use crate::query::query_string;
 use crate::response::document::document_determs::{
     GetDocumentDetermsResponse, GetDocumentDetermsResponseBody,
