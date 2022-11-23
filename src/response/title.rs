@@ -1,5 +1,6 @@
 use serde::{Deserialize, Serialize};
 
+pub mod title;
 pub mod titles;
 
 #[derive(Debug, Deserialize, Clone, Serialize)]

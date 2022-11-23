@@ -55,6 +55,7 @@ collaboflow-rs = ""
 ### Title
 
 - [getTitles](http://docs.collaboflow.com/api-docs/#/Title/getTitles)
+- [getTitle](http://docs.collaboflow.com/api-docs/#/Title/getTitle)
 
 ## LICENSE
 
