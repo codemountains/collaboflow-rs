@@ -20,7 +20,6 @@ pub mod document;
 pub mod form;
 pub mod group;
 pub mod mystatus;
-pub mod query;
 pub mod title;
 pub mod user;
 

@@ -1,5 +1,5 @@
-use crate::client::query::query_string;
 use crate::client::HEADER_KEY;
+use crate::query::query_string;
 use crate::response::error::{ErrorResponse, ErrorResponseBody};
 use crate::response::group::groups::{GetGroupsResponse, GetGroupsResponseBody};
 use std::collections::HashMap;

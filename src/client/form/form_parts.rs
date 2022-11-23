@@ -1,4 +1,4 @@
-use crate::client::query::query_string;
+use crate::query::query_string;
 use crate::response::error::{ErrorResponse, ErrorResponseBody};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
