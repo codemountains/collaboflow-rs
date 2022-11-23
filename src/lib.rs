@@ -1,5 +1,6 @@
 mod authorization;
 mod client;
+pub mod query;
 pub mod response;
 
 pub use authorization::AuthorizationType;
