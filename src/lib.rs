@@ -1,5 +1,5 @@
-mod authorization;
-mod client;
+pub mod authorization;
+pub mod client;
 pub mod query;
 pub mod response;
 
