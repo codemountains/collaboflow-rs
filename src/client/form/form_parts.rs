@@ -1,32 +1,16 @@
+use crate::client::HEADER_KEY;
 use crate::query::query_string;
 use crate::response::error::{ErrorResponse, ErrorResponseBody};
-use serde::{Deserialize, Serialize};
-use serde_json::Value;
+use crate::response::form::form_parts::{GetFormPartsResponse, GetFormPartsResponseBody};
 use std::collections::HashMap;
 
 const RESOURCE: &str = "forms";
 const NESTED_RESOURCE: &str = "versions";
 const LAST_RESOURCE: &str = "parts";
-const HEADER_KEY: &str = "X-Collaboflow-Authorization";
 
 pub struct FormParts {
     url: String,
     authorization_header: String,
-}
-
-#[derive(Debug, Deserialize, Clone, Serialize)]
-pub struct GetFormPartsResponse {
-    pub status: u16,
-    pub body: GetFormPartsResponseBody,
-}
-
-#[derive(Debug, Deserialize, Clone, Serialize)]
-pub struct GetFormPartsResponseBody {
-    pub app_cd: i32,
-    pub version: i32,
-    pub total_count: i32,
-    pub error: bool,
-    pub parts: Value,
 }
 
 impl FormParts {

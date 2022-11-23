@@ -1,8 +1,8 @@
-use crate::query::query_string;
-use std::collections::HashMap;
 use crate::client::HEADER_KEY;
+use crate::query::query_string;
 use crate::response::error::{ErrorResponse, ErrorResponseBody};
 use crate::response::form::forms::{GetFormsResponse, GetFormsResponseBody};
+use std::collections::HashMap;
 
 const RESOURCE: &str = "forms";
 
