@@ -5,6 +5,7 @@ use crate::client::document::documents::Documents;
 use crate::client::form::form_parts::FormParts;
 use crate::client::form::form_settings_prints::FormSettingsPrints;
 use crate::client::form::forms::Forms;
+use crate::client::group::group::Group;
 use crate::client::group::groups::Groups;
 use crate::client::mystatus::mydeterms::MyDeterms;
 use crate::client::mystatus::mydrafts::MyDrafts;
@@ -36,6 +37,7 @@ pub struct CollaboflowClient {
     pub users: Users,
     pub user: User,
     pub groups: Groups,
+    pub group: Group,
 }
 
 impl CollaboflowClient {
@@ -64,6 +66,7 @@ impl CollaboflowClient {
 
         // Group
         let groups = Groups::new(base_url, authorization_header);
+        let group = Group::new(base_url, authorization_header);
 
         Self {
             documents,
@@ -79,6 +82,7 @@ impl CollaboflowClient {
             users,
             user,
             groups,
+            group,
         }
     }
 }
