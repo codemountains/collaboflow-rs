@@ -12,13 +12,13 @@ A Collaboflow REST API client for Rust language.
 
 ### Importing
 
-The driver is available on [crates.io](https://crates.io/).
+The driver is available on [crates.io](https://crates.io/crates/collaboflow-rs).
 
 To use the driver in your application, simply add it to your project's `Cargo.toml`.
 
 ```toml
 [dependencies]
-collaboflow-rs = "0.0.2"
+collaboflow-rs = "0.0.3"
 ```
 
 ## Support APIs
