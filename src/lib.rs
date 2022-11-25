@@ -3,7 +3,7 @@ pub mod client;
 pub mod query;
 pub mod response;
 
-pub use authorization::AuthorizationType;
+// pub use authorization::AuthorizationType;
 pub use authorization::CollaboflowAuthorization;
 pub use client::CollaboflowClient;
 
@@ -30,20 +30,24 @@ mod tests {
     fn client_new(auth: AuthorizationType) -> CollaboflowClient {
         dotenv().ok();
 
-        let value_key = match auth {
-            AuthorizationType::Password => USER_PASSWORD,
-            AuthorizationType::ApiKey => API_KEY,
+        let authorization = match auth {
+            AuthorizationType::ApiKey => CollaboflowAuthorization::api_key(
+                env::var(USER_ID)
+                    .expect(format!("{} is undefined.", USER_ID).as_str())
+                    .as_str(),
+                env::var(API_KEY)
+                    .expect(format!("{} is undefined.", API_KEY).as_str())
+                    .as_str(),
+            ),
+            AuthorizationType::Password => CollaboflowAuthorization::password(
+                env::var(USER_ID)
+                    .expect(format!("{} is undefined.", USER_ID).as_str())
+                    .as_str(),
+                env::var(USER_PASSWORD)
+                    .expect(format!("{} is undefined.", USER_PASSWORD).as_str())
+                    .as_str(),
+            ),
         };
-
-        let authorization = CollaboflowAuthorization::new(
-            auth,
-            env::var(USER_ID)
-                .expect(format!("{} is undefined.", USER_ID).as_str())
-                .as_str(),
-            env::var(value_key)
-                .expect(format!("{} is undefined.", value_key).as_str())
-                .as_str(),
-        );
 
         CollaboflowClient::new(
             env::var(BASE_URL)
