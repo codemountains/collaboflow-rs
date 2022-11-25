@@ -9,6 +9,7 @@ use std::collections::HashMap;
 const RESOURCE: &str = "documents";
 const NESTED_RESOURCE: &str = "determs";
 
+#[derive(Debug)]
 pub struct DocumentDeterms {
     url: String,
     authorization_header: String,

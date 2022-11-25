@@ -23,6 +23,7 @@ pub mod mystatus;
 pub mod title;
 pub mod user;
 
+#[derive(Debug)]
 pub struct CollaboflowClient {
     pub document: Document,
     pub document_determs: DocumentDeterms,

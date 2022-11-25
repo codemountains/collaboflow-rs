@@ -6,6 +6,7 @@ use std::collections::HashMap;
 
 const RESOURCE: &str = "mydrafts";
 
+#[derive(Debug)]
 pub struct MyDrafts {
     url: String,
     authorization_header: String,

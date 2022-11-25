@@ -6,6 +6,7 @@ use std::collections::HashMap;
 
 const RESOURCE: &str = "groups";
 
+#[derive(Debug)]
 pub struct Groups {
     url: String,
     authorization_header: String,
