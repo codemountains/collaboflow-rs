@@ -6,12 +6,12 @@ use std::collections::HashMap;
 
 const RESOURCE: &str = "documents";
 
-pub struct Documents {
+pub struct Document {
     url: String,
     authorization_header: String,
 }
 
-impl Documents {
+impl Document {
     pub fn new(url: &str, authorization_header: &str) -> Self {
         Self {
             url: url.to_string() + RESOURCE,

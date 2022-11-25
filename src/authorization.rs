@@ -3,6 +3,7 @@ use std::fmt;
 
 pub const HEADER_KEY: &str = "X-Collaboflow-Authorization";
 
+#[derive(Debug)]
 pub enum AuthorizationType {
     ApiKey,
     Password,

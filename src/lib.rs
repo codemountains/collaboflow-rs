@@ -112,21 +112,21 @@ mod tests {
     }
 
     #[tokio::test]
-    async fn documents_works() {
+    async fn document_works() {
         let document_id = document_id();
 
         let mut query_params = HashMap::new();
         query_params.insert("app_cd".to_string(), app_cd());
 
         let client = client_new_by_api_key();
-        let resp = client.documents.get(document_id, query_params).await;
+        let resp = client.document.get(document_id, query_params).await;
         assert_eq!(true, resp.is_ok());
 
         let mut query_params = HashMap::new();
         query_params.insert("app_cd".to_string(), app_cd());
 
         let client = client_new_by_password();
-        let resp = client.documents.get(document_id, query_params).await;
+        let resp = client.document.get(document_id, query_params).await;
         assert_eq!(true, resp.is_ok());
     }
 
