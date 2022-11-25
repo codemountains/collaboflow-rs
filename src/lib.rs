@@ -3,7 +3,6 @@ pub mod client;
 pub mod query;
 pub mod response;
 
-// pub use authorization::AuthorizationType;
 pub use authorization::CollaboflowAuthorization;
 pub use client::CollaboflowClient;
 
