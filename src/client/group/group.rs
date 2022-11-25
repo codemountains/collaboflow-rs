@@ -7,7 +7,7 @@ use std::collections::HashMap;
 
 const RESOURCE: &str = "groups";
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Group {
     url: String,
     authorization_header: String,

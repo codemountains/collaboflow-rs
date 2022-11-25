@@ -7,7 +7,7 @@ use std::collections::HashMap;
 
 const RESOURCE: &str = "users";
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct User {
     url: String,
     authorization_header: String,

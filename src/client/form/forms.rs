@@ -6,7 +6,7 @@ use std::collections::HashMap;
 
 const RESOURCE: &str = "forms";
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Forms {
     url: String,
     authorization_header: String,

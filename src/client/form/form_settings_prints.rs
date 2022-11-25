@@ -10,7 +10,7 @@ const RESOURCE: &str = "forms";
 const NESTED_RESOURCE: &str = "versions";
 const LAST_RESOURCE: &str = "settings/prints";
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct FormSettingsPrints {
     url: String,
     authorization_header: String,

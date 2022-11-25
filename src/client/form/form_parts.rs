@@ -8,7 +8,7 @@ const RESOURCE: &str = "forms";
 const NESTED_RESOURCE: &str = "versions";
 const LAST_RESOURCE: &str = "parts";
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct FormParts {
     url: String,
     authorization_header: String,
