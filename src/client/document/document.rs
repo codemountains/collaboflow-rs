@@ -1,6 +1,6 @@
 use crate::authorization::HEADER_KEY;
 use crate::query::query_string;
-use crate::response::document::documents::{GetDocumentsResponse, GetDocumentsResponseBody};
+use crate::response::document::document::{GetDocumentResponse, GetDocumentResponseBody};
 use crate::response::error::{ErrorResponse, ErrorResponseBody};
 use std::collections::HashMap;
 
@@ -23,7 +23,7 @@ impl Document {
         &self,
         document_id: i32,
         query_params: HashMap<String, String>,
-    ) -> Result<GetDocumentsResponse, ErrorResponse> {
+    ) -> Result<GetDocumentResponse, ErrorResponse> {
         let request_url = format!(
             "{}/{}?{}",
             &self.url,
@@ -43,8 +43,8 @@ impl Document {
                 let status = resp.status().as_u16();
 
                 if status == 200 {
-                    match resp.json::<GetDocumentsResponseBody>().await {
-                        Ok(body) => Ok(GetDocumentsResponse { status, body }),
+                    match resp.json::<GetDocumentResponseBody>().await {
+                        Ok(body) => Ok(GetDocumentResponse { status, body }),
                         Err(err) => {
                             let body = ErrorResponseBody {
                                 error: true,
