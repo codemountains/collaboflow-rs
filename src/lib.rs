@@ -421,4 +421,18 @@ mod tests {
         let resp = cloned_client.document.get(document_id, query_params).await;
         assert_eq!(true, resp.is_ok());
     }
+
+    #[tokio::test]
+    async fn anyhow_works() -> anyhow::Result<()> {
+        let document_id = document_id();
+
+        let mut query_params = HashMap::new();
+        query_params.insert("app_cd".to_string(), app_cd());
+
+        let client = client_new_by_api_key();
+        let resp = client.document.get(document_id, query_params).await?;
+        assert_eq!(200u16, resp.status);
+
+        Ok(())
+    }
 }
