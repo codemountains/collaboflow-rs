@@ -392,19 +392,15 @@ mod tests {
 
     #[test]
     fn query_works() {
-        let fields = vec!["name".to_string(), "code".to_string()];
-
         let query = Query::builder()
             .app_cd(1)
             .offset(10)
             .limit(10)
             .current(true)
             .category_id(1)
-            .detail(true)
-            .fields(fields)
+            .detail(false)
             .key("userid");
-        println!("{}", query.to_string());
-        assert_eq!(94, query.to_string().len());
+        assert_eq!(78, query.to_string().len());
 
         let empty_query = Query::builder();
         assert_eq!(true, empty_query.to_string().is_empty());

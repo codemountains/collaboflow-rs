@@ -9,7 +9,6 @@ pub struct Query {
     pub current: Option<bool>,
     pub category_id: Option<i32>,
     pub detail: Option<bool>,
-    pub fields: Option<Vec<String>>,
     pub key: Option<String>,
 }
 
@@ -22,7 +21,6 @@ impl Query {
             current: None,
             category_id: None,
             detail: None,
-            fields: None,
             key: None,
         }
     }
@@ -54,11 +52,6 @@ impl Query {
 
     pub fn detail(mut self, detail: bool) -> Self {
         self.detail = Some(detail);
-        self
-    }
-
-    pub fn fields(mut self, fields: Vec<String>) -> Self {
-        self.fields = Some(fields);
         self
     }
 
@@ -108,14 +101,6 @@ impl fmt::Display for Query {
                 query_string += "&"
             }
             query_string += format!("detail={}", detail).as_str();
-        }
-
-        if let Some(fields) = &self.fields {
-            if !query_string.is_empty() {
-                query_string += "&"
-            }
-
-            query_string += format!("fields={}", fields.join(",")).as_str();
         }
 
         if let Some(key) = &self.key {
