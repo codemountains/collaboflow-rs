@@ -3,13 +3,13 @@ pub mod client;
 pub mod query;
 pub mod response;
 
-pub use authorization::CollaboflowAuthorization;
+pub use authorization::Authorization;
 pub use client::CollaboflowClient;
 pub use query::Query;
 
 #[cfg(test)]
 mod tests {
-    use crate::authorization::{AuthorizationType, CollaboflowAuthorization};
+    use crate::authorization::{Authorization, AuthorizationType};
     use crate::client::CollaboflowClient;
     use crate::Query;
     use dotenv::dotenv;
@@ -31,7 +31,7 @@ mod tests {
         dotenv().ok();
 
         let authorization = match auth {
-            AuthorizationType::ApiKey => CollaboflowAuthorization::with_api_key(
+            AuthorizationType::ApiKey => Authorization::with_api_key(
                 env::var(USER_ID)
                     .expect(format!("{} is undefined.", USER_ID).as_str())
                     .as_str(),
@@ -39,7 +39,7 @@ mod tests {
                     .expect(format!("{} is undefined.", API_KEY).as_str())
                     .as_str(),
             ),
-            AuthorizationType::Password => CollaboflowAuthorization::with_password(
+            AuthorizationType::Password => Authorization::with_password(
                 env::var(USER_ID)
                     .expect(format!("{} is undefined.", USER_ID).as_str())
                     .as_str(),

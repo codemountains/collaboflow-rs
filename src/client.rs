@@ -1,4 +1,4 @@
-use crate::authorization::CollaboflowAuthorization;
+use crate::authorization::Authorization;
 use crate::client::document::document::Document;
 use crate::client::document::document_contents::DocumentContents;
 use crate::client::document::document_determs::DocumentDeterms;
@@ -44,7 +44,7 @@ pub struct CollaboflowClient {
 }
 
 impl CollaboflowClient {
-    pub fn new(base_url: &str, authorization: CollaboflowAuthorization) -> Self {
+    pub fn new(base_url: &str, authorization: Authorization) -> Self {
         let authorization_header = &authorization.to_string();
 
         // Document

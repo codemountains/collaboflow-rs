@@ -3,19 +3,20 @@ use std::fmt;
 
 pub const HEADER_KEY: &str = "X-Collaboflow-Authorization";
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub enum AuthorizationType {
     ApiKey,
     Password,
 }
 
-pub struct CollaboflowAuthorization {
+#[derive(Debug, Clone)]
+pub struct Authorization {
     authorization_type: AuthorizationType,
     user_id: String,
     value: String,
 }
 
-impl CollaboflowAuthorization {
+impl Authorization {
     pub fn with_api_key(user_id: &str, api_key: &str) -> Self {
         Self {
             authorization_type: AuthorizationType::ApiKey,
@@ -33,7 +34,7 @@ impl CollaboflowAuthorization {
     }
 }
 
-impl fmt::Display for CollaboflowAuthorization {
+impl fmt::Display for Authorization {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         let auth_header = match &self.authorization_type {
             AuthorizationType::ApiKey => format!("{}/apikey:{}", &self.user_id, &self.value),
