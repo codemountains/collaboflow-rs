@@ -316,16 +316,14 @@ mod tests {
 
     #[tokio::test]
     async fn groups_works() {
-        let query_params = HashMap::new();
-
+        let query = Query::default();
         let client = client_new_by_api_key();
-        let resp = client.groups.get(query_params).await;
+        let resp = client.groups.get(query).await;
         assert_eq!(true, resp.is_ok());
 
-        let query_params = HashMap::new();
-
+        let query = Query::default();
         let client = client_new_by_password();
-        let resp = client.groups.get(query_params).await;
+        let resp = client.groups.get(query).await;
         assert_eq!(true, resp.is_ok());
     }
 
