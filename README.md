@@ -3,7 +3,7 @@
 [![docs.rs](https://docs.rs/collaboflow-rs/badge.svg)](https://docs.rs/collaboflow-rs)
 [![License](https://img.shields.io/github/license/codemountains/collaboflow-rs)](LICENSE)
 
-A Collaboflow REST API client for Rust language.
+A [Collaboflow REST API](http://docs.collaboflow.com/api-docs/) client for Rust language.
 
 **This is not an official crate, just a hobby project.**
 
