@@ -1,10 +1,9 @@
 use crate::authorization::HEADER_KEY;
-use crate::query::query_string;
 use crate::response::document::document_determs::{
     GetDocumentDetermsResponse, GetDocumentDetermsResponseBody,
 };
 use crate::response::error::{ErrorResponse, ErrorResponseBody};
-use std::collections::HashMap;
+use crate::Query;
 
 const RESOURCE: &str = "documents";
 const NESTED_RESOURCE: &str = "determs";
@@ -26,14 +25,14 @@ impl DocumentDeterms {
     pub async fn get(
         &self,
         document_id: i32,
-        query_params: HashMap<String, String>,
+        query: Query,
     ) -> Result<GetDocumentDetermsResponse, ErrorResponse> {
         let request_url = format!(
             "{}/{}/{}?{}",
             &self.url,
             document_id,
             NESTED_RESOURCE,
-            query_string(query_params)
+            query.to_string(),
         );
 
         let http_client = reqwest::Client::new();
