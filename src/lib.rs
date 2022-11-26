@@ -13,7 +13,6 @@ mod tests {
     use crate::client::CollaboflowClient;
     use crate::Query;
     use dotenv::dotenv;
-    use std::collections::HashMap;
     use std::env;
 
     const BASE_URL: &str = "BASE_URL";
@@ -66,9 +65,13 @@ mod tests {
         client_new(AuthorizationType::Password)
     }
 
-    fn app_cd() -> String {
+    fn app_cd() -> i32 {
         dotenv().ok();
-        env::var(APP_CD).expect(format!("{} is undefined.", APP_CD).as_str())
+        env::var(APP_CD)
+            .expect(format!("{} is undefined.", APP_CD).as_str())
+            .as_str()
+            .parse::<i32>()
+            .expect(format!("{} is not a number.", APP_CD).as_str())
     }
 
     fn document_id() -> i32 {
@@ -115,7 +118,7 @@ mod tests {
 
     #[tokio::test]
     async fn document_works() {
-        let app_cd = 1;
+        let app_cd = app_cd();
         let document_id = document_id();
 
         let query = Query::builder().app_cd(app_cd);
@@ -131,7 +134,7 @@ mod tests {
 
     #[tokio::test]
     async fn document_determs_works() {
-        let app_cd = 1;
+        let app_cd = app_cd();
         let document_id = document_id();
 
         let query = Query::builder().app_cd(app_cd);
@@ -147,7 +150,7 @@ mod tests {
 
     #[tokio::test]
     async fn document_contents_works() {
-        let app_cd = 1;
+        let app_cd = app_cd();
         let document_id = document_id();
 
         let query = Query::builder().app_cd(app_cd);
@@ -163,7 +166,7 @@ mod tests {
 
     #[tokio::test]
     async fn mydeterms_works() {
-        let app_cd = 1;
+        let app_cd = app_cd();
 
         let query = Query::builder().app_cd(app_cd);
         let client = client_new_by_api_key();
@@ -178,7 +181,7 @@ mod tests {
 
     #[tokio::test]
     async fn myrequests_works() {
-        let app_cd = 1;
+        let app_cd = app_cd();
 
         let query = Query::builder().app_cd(app_cd);
         let client = client_new_by_api_key();
@@ -193,7 +196,7 @@ mod tests {
 
     #[tokio::test]
     async fn mydrafts_works() {
-        let app_cd = 1;
+        let app_cd = app_cd();
 
         let query = Query::builder().app_cd(app_cd);
         let client = client_new_by_api_key();
@@ -208,7 +211,7 @@ mod tests {
 
     #[tokio::test]
     async fn myprocesses_works() {
-        let app_cd = 1;
+        let app_cd = app_cd();
 
         let query = Query::builder().app_cd(app_cd);
         let client = client_new_by_api_key();
@@ -223,7 +226,7 @@ mod tests {
 
     #[tokio::test]
     async fn forms_works() {
-        let app_cd = 1;
+        let app_cd = app_cd();
 
         let query = Query::builder().app_cd(app_cd);
         let client = client_new_by_api_key();
@@ -238,7 +241,7 @@ mod tests {
 
     #[tokio::test]
     async fn form_parts_works() {
-        let app_cd = 1;
+        let app_cd = app_cd();
         let form_id = form_id();
         let form_version = form_version();
 
@@ -255,7 +258,7 @@ mod tests {
 
     #[tokio::test]
     async fn form_settings_prints_works() {
-        let app_cd = 1;
+        let app_cd = app_cd();
         let form_id = form_id();
         let form_version = form_version();
 
