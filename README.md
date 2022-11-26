@@ -1,4 +1,7 @@
 # Collaboflow REST API Client
+[![Crates.io](https://img.shields.io/crates/v/collaboflow-rs.svg)](https://crates.io/crates/collaboflow-rs)
+[![docs.rs](https://docs.rs/collaboflow-rs/badge.svg)](https://docs.rs/collaboflow-rs)
+[![License](https://img.shields.io/github/license/codemountains/collaboflow-rs)](LICENSE)
 
 A Collaboflow REST API client for Rust language.
 
