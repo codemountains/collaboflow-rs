@@ -1,8 +1,7 @@
 use crate::authorization::HEADER_KEY;
-use crate::query::query_string;
 use crate::response::error::{ErrorResponse, ErrorResponseBody};
 use crate::response::form::form_parts::{GetFormPartsResponse, GetFormPartsResponseBody};
-use std::collections::HashMap;
+use crate::Query;
 
 const RESOURCE: &str = "forms";
 const NESTED_RESOURCE: &str = "versions";
@@ -26,7 +25,7 @@ impl FormParts {
         &self,
         form_id: i32,
         form_version: i32,
-        query_params: HashMap<String, String>,
+        query: Query,
     ) -> Result<GetFormPartsResponse, ErrorResponse> {
         let request_url = format!(
             "{}/{}/{}/{}/{}?{}",
@@ -35,7 +34,7 @@ impl FormParts {
             NESTED_RESOURCE,
             form_version,
             LAST_RESOURCE,
-            query_string(query_params)
+            query.to_string(),
         );
 
         let http_client = reqwest::Client::new();
