@@ -32,7 +32,7 @@ mod tests {
         dotenv().ok();
 
         let authorization = match auth {
-            AuthorizationType::ApiKey => CollaboflowAuthorization::api_key(
+            AuthorizationType::ApiKey => CollaboflowAuthorization::with_api_key(
                 env::var(USER_ID)
                     .expect(format!("{} is undefined.", USER_ID).as_str())
                     .as_str(),
