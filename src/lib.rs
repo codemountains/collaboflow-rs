@@ -323,7 +323,6 @@ mod tests {
         let group_id = group_id();
 
         let query = Query::default();
-        println!("{:?}", query);
         let client = client_new_by_api_key();
         let resp = client.group.get(&group_id, query).await;
         assert_eq!(true, resp.is_ok());
