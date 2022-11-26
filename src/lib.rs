@@ -150,26 +150,17 @@ mod tests {
 
     #[tokio::test]
     async fn document_contents_works() {
+        let app_cd = 1;
         let document_id = document_id();
 
-        let mut query_params = HashMap::new();
-        query_params.insert("app_cd".to_string(), app_cd());
-
+        let query = Query::builder().app_cd(app_cd);
         let client = client_new_by_api_key();
-        let resp = client
-            .document_contents
-            .get(document_id, query_params)
-            .await;
+        let resp = client.document_contents.get(document_id, query).await;
         assert_eq!(true, resp.is_ok());
 
-        let mut query_params = HashMap::new();
-        query_params.insert("app_cd".to_string(), app_cd());
-
+        let query = Query::builder().app_cd(app_cd);
         let client = client_new_by_password();
-        let resp = client
-            .document_contents
-            .get(document_id, query_params)
-            .await;
+        let resp = client.document_contents.get(document_id, query).await;
         assert_eq!(true, resp.is_ok());
     }
 
