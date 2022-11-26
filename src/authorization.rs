@@ -24,7 +24,7 @@ impl CollaboflowAuthorization {
         }
     }
 
-    pub fn password(user_id: &str, password: &str) -> Self {
+    pub fn with_password(user_id: &str, password: &str) -> Self {
         Self {
             authorization_type: AuthorizationType::Password,
             user_id: user_id.to_string(),

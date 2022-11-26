@@ -40,7 +40,7 @@ mod tests {
                     .expect(format!("{} is undefined.", API_KEY).as_str())
                     .as_str(),
             ),
-            AuthorizationType::Password => CollaboflowAuthorization::password(
+            AuthorizationType::Password => CollaboflowAuthorization::with_password(
                 env::var(USER_ID)
                     .expect(format!("{} is undefined.", USER_ID).as_str())
                     .as_str(),
