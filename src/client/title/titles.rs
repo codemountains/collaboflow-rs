@@ -1,9 +1,7 @@
 use crate::authorization::HEADER_KEY;
-use crate::query::query_string;
 use crate::response::error::{ErrorResponse, ErrorResponseBody};
-
 use crate::response::title::titles::{GetTitlesResponse, GetTitlesResponseBody};
-use std::collections::HashMap;
+use crate::Query;
 
 const RESOURCE: &str = "titles";
 
@@ -21,11 +19,8 @@ impl Titles {
         }
     }
 
-    pub async fn get(
-        &self,
-        query_params: HashMap<String, String>,
-    ) -> Result<GetTitlesResponse, ErrorResponse> {
-        let request_url = format!("{}?{}", &self.url, query_string(query_params));
+    pub async fn get(&self, query: Query) -> Result<GetTitlesResponse, ErrorResponse> {
+        let request_url = format!("{}?{}", &self.url, query);
 
         let http_client = reqwest::Client::new();
         let result = http_client
