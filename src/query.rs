@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 use std::fmt;
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Default)]
 pub struct Query {
     pub app_cd: Option<i32>,
     pub offset: Option<i32>,
