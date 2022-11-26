@@ -293,16 +293,14 @@ mod tests {
 
     #[tokio::test]
     async fn user_works() {
-        let query_params = HashMap::new();
-
+        let query = Query::default();
         let client = client_new_by_api_key();
-        let resp = client.user.get(user_unique_id(), query_params).await;
+        let resp = client.user.get(user_unique_id(), query).await;
         assert_eq!(true, resp.is_ok());
 
-        let query_params = HashMap::new();
-
+        let query = Query::default();
         let client = client_new_by_password();
-        let resp = client.user.get(user_unique_id(), query_params).await;
+        let resp = client.user.get(user_unique_id(), query).await;
         assert_eq!(true, resp.is_ok());
     }
 

@@ -1,9 +1,8 @@
 use crate::authorization::HEADER_KEY;
-use crate::query::query_string;
 use crate::response::error::{ErrorResponse, ErrorResponseBody};
 use crate::response::user::user::GetUserResponse;
 use crate::response::user::UserRecord;
-use std::collections::HashMap;
+use crate::Query;
 
 const RESOURCE: &str = "users";
 
@@ -24,9 +23,9 @@ impl User {
     pub async fn get(
         &self,
         user_id: String,
-        query_params: HashMap<String, String>,
+        query: Query,
     ) -> Result<GetUserResponse, ErrorResponse> {
-        let request_url = format!("{}/{}?{}", &self.url, user_id, query_string(query_params));
+        let request_url = format!("{}/{}?{}", &self.url, user_id, query);
 
         let http_client = reqwest::Client::new();
         let result = http_client
