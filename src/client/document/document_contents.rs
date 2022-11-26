@@ -29,10 +29,7 @@ impl DocumentContents {
     ) -> Result<GetDocumentContentsResponse, ErrorResponse> {
         let request_url = format!(
             "{}/{}/{}?{}",
-            &self.url,
-            document_id,
-            NESTED_RESOURCE,
-            query.to_string(),
+            &self.url, document_id, NESTED_RESOURCE, query,
         );
 
         let http_client = reqwest::Client::new();

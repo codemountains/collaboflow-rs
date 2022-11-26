@@ -31,12 +31,7 @@ impl FormSettingsPrints {
     ) -> Result<GetFormSettingsPrintsResponse, ErrorResponse> {
         let request_url = format!(
             "{}/{}/{}/{}/{}?{}",
-            &self.url,
-            form_id,
-            NESTED_RESOURCE,
-            form_version,
-            LAST_RESOURCE,
-            query.to_string(),
+            &self.url, form_id, NESTED_RESOURCE, form_version, LAST_RESOURCE, query,
         );
 
         let http_client = reqwest::Client::new();

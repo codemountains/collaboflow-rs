@@ -20,7 +20,7 @@ impl Forms {
     }
 
     pub async fn get(&self, query: Query) -> Result<GetFormsResponse, ErrorResponse> {
-        let request_url = format!("{}?{}", &self.url, query.to_string());
+        let request_url = format!("{}?{}", &self.url, query);
 
         let http_client = reqwest::Client::new();
         let result = http_client

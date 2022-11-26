@@ -25,7 +25,7 @@ impl Group {
         group_id: &str,
         query: Query,
     ) -> Result<GetGroupResponse, ErrorResponse> {
-        let request_url = format!("{}/{}?{}", &self.url, group_id, query.to_string());
+        let request_url = format!("{}/{}?{}", &self.url, group_id, query);
 
         let http_client = reqwest::Client::new();
         let result = http_client

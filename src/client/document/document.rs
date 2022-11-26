@@ -24,7 +24,7 @@ impl Document {
         document_id: i32,
         query: Query,
     ) -> Result<GetDocumentResponse, ErrorResponse> {
-        let request_url = format!("{}/{}?{}", &self.url, document_id, query.to_string());
+        let request_url = format!("{}/{}?{}", &self.url, document_id, query);
 
         let http_client = reqwest::Client::new();
         let result = http_client
