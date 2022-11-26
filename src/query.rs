@@ -1,5 +1,5 @@
 use std::collections::HashMap;
-use std::fmt::{Display, Formatter};
+use std::fmt;
 
 #[derive(Debug, Clone)]
 pub struct Query {
@@ -68,8 +68,8 @@ impl Query {
     }
 }
 
-impl Display for Query {
-    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+impl fmt::Display for Query {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let mut query_string = "".to_string();
         if let Some(app_cd) = self.app_cd {
             query_string = format!("app_cd={}", app_cd);
