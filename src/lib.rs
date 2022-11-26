@@ -5,11 +5,13 @@ pub mod response;
 
 pub use authorization::CollaboflowAuthorization;
 pub use client::CollaboflowClient;
+pub use query::Query;
 
 #[cfg(test)]
 mod tests {
     use crate::authorization::{AuthorizationType, CollaboflowAuthorization};
     use crate::client::CollaboflowClient;
+    use crate::Query;
     use dotenv::dotenv;
     use std::collections::HashMap;
     use std::env;
@@ -434,5 +436,25 @@ mod tests {
         assert_eq!(200u16, resp.status);
 
         Ok(())
+    }
+
+    #[test]
+    fn query_works() {
+        let fields = vec!["name".to_string(), "code".to_string()];
+
+        let query = Query::builder()
+            .app_cd(1)
+            .offset(10)
+            .limit(10)
+            .current(true)
+            .category_id(1)
+            .detail(true)
+            .fields(fields)
+            .key("userid");
+        println!("{}", query.to_string());
+        assert_eq!(94, query.to_string().len());
+
+        let empty_query = Query::builder();
+        assert_eq!(true, empty_query.to_string().is_empty());
     }
 }
