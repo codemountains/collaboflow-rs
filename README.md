@@ -18,7 +18,7 @@ To use the driver in your application, simply add it to your project's `Cargo.to
 
 ```toml
 [dependencies]
-collaboflow-rs = "0.0.3"
+collaboflow-rs = "0.0.4"
 ```
 
 ## Support APIs
@@ -45,16 +45,19 @@ collaboflow-rs = "0.0.3"
 ### User
 
 - [getUsers](http://docs.collaboflow.com/api-docs/#/User/getUsers)
+  - Query `fields` is not supported.
 - [getUser](http://docs.collaboflow.com/api-docs/#/User/getUser)
 
 ### Group
 
 - [getGroups](http://docs.collaboflow.com/api-docs/#/Group/getGroups)
+  - Query `fields` is not supported.
 - [getGroup](http://docs.collaboflow.com/api-docs/#/Group/getGroup)
 
 ### Title
 
 - [getTitles](http://docs.collaboflow.com/api-docs/#/Title/getTitles)
+  - Query `fields` is not supported.
 - [getTitle](http://docs.collaboflow.com/api-docs/#/Title/getTitle)
 
 ## LICENSE

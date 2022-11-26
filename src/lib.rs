@@ -5,13 +5,14 @@ pub mod response;
 
 pub use authorization::CollaboflowAuthorization;
 pub use client::CollaboflowClient;
+pub use query::Query;
 
 #[cfg(test)]
 mod tests {
     use crate::authorization::{AuthorizationType, CollaboflowAuthorization};
     use crate::client::CollaboflowClient;
+    use crate::Query;
     use dotenv::dotenv;
-    use std::collections::HashMap;
     use std::env;
 
     const BASE_URL: &str = "BASE_URL";
@@ -30,7 +31,7 @@ mod tests {
         dotenv().ok();
 
         let authorization = match auth {
-            AuthorizationType::ApiKey => CollaboflowAuthorization::api_key(
+            AuthorizationType::ApiKey => CollaboflowAuthorization::with_api_key(
                 env::var(USER_ID)
                     .expect(format!("{} is undefined.", USER_ID).as_str())
                     .as_str(),
@@ -38,7 +39,7 @@ mod tests {
                     .expect(format!("{} is undefined.", API_KEY).as_str())
                     .as_str(),
             ),
-            AuthorizationType::Password => CollaboflowAuthorization::password(
+            AuthorizationType::Password => CollaboflowAuthorization::with_password(
                 env::var(USER_ID)
                     .expect(format!("{} is undefined.", USER_ID).as_str())
                     .as_str(),
@@ -64,9 +65,13 @@ mod tests {
         client_new(AuthorizationType::Password)
     }
 
-    fn app_cd() -> String {
+    fn app_cd() -> i32 {
         dotenv().ok();
-        env::var(APP_CD).expect(format!("{} is undefined.", APP_CD).as_str())
+        env::var(APP_CD)
+            .expect(format!("{} is undefined.", APP_CD).as_str())
+            .as_str()
+            .parse::<i32>()
+            .expect(format!("{} is not a number.", APP_CD).as_str())
     }
 
     fn document_id() -> i32 {
@@ -112,247 +117,204 @@ mod tests {
     }
 
     #[tokio::test]
-    async fn documents_works() {
+    async fn document_works() {
+        let app_cd = app_cd();
         let document_id = document_id();
 
-        let mut query_params = HashMap::new();
-        query_params.insert("app_cd".to_string(), app_cd());
-
+        let query = Query::builder().app_cd(app_cd);
         let client = client_new_by_api_key();
-        let resp = client.documents.get(document_id, query_params).await;
+        let resp = client.document.get(document_id, query).await;
         assert_eq!(true, resp.is_ok());
 
-        let mut query_params = HashMap::new();
-        query_params.insert("app_cd".to_string(), app_cd());
-
+        let query = Query::builder().app_cd(app_cd);
         let client = client_new_by_password();
-        let resp = client.documents.get(document_id, query_params).await;
+        let resp = client.document.get(document_id, query).await;
         assert_eq!(true, resp.is_ok());
     }
 
     #[tokio::test]
     async fn document_determs_works() {
+        let app_cd = app_cd();
         let document_id = document_id();
 
-        let mut query_params = HashMap::new();
-        query_params.insert("app_cd".to_string(), app_cd());
-
+        let query = Query::builder().app_cd(app_cd);
         let client = client_new_by_api_key();
-        let resp = client.document_determs.get(document_id, query_params).await;
+        let resp = client.document_determs.get(document_id, query).await;
         assert_eq!(true, resp.is_ok());
 
-        let mut query_params = HashMap::new();
-        query_params.insert("app_cd".to_string(), app_cd());
-
+        let query = Query::builder().app_cd(app_cd);
         let client = client_new_by_password();
-        let resp = client.document_determs.get(document_id, query_params).await;
+        let resp = client.document_determs.get(document_id, query).await;
         assert_eq!(true, resp.is_ok());
     }
 
     #[tokio::test]
     async fn document_contents_works() {
+        let app_cd = app_cd();
         let document_id = document_id();
 
-        let mut query_params = HashMap::new();
-        query_params.insert("app_cd".to_string(), app_cd());
-
+        let query = Query::builder().app_cd(app_cd);
         let client = client_new_by_api_key();
-        let resp = client
-            .document_contents
-            .get(document_id, query_params)
-            .await;
+        let resp = client.document_contents.get(document_id, query).await;
         assert_eq!(true, resp.is_ok());
 
-        let mut query_params = HashMap::new();
-        query_params.insert("app_cd".to_string(), app_cd());
-
+        let query = Query::builder().app_cd(app_cd);
         let client = client_new_by_password();
-        let resp = client
-            .document_contents
-            .get(document_id, query_params)
-            .await;
+        let resp = client.document_contents.get(document_id, query).await;
         assert_eq!(true, resp.is_ok());
     }
 
     #[tokio::test]
     async fn mydeterms_works() {
-        let mut query_params = HashMap::new();
-        query_params.insert("app_cd".to_string(), app_cd());
+        let app_cd = app_cd();
 
+        let query = Query::builder().app_cd(app_cd);
         let client = client_new_by_api_key();
-        let resp = client.mydeterms.get(query_params).await;
+        let resp = client.mydeterms.get(query).await;
         assert_eq!(true, resp.is_ok());
 
-        let mut query_params = HashMap::new();
-        query_params.insert("app_cd".to_string(), app_cd());
-
+        let query = Query::builder().app_cd(app_cd);
         let client = client_new_by_password();
-        let resp = client.mydeterms.get(query_params).await;
+        let resp = client.mydeterms.get(query).await;
         assert_eq!(true, resp.is_ok());
     }
 
     #[tokio::test]
     async fn myrequests_works() {
-        let mut query_params = HashMap::new();
-        query_params.insert("app_cd".to_string(), app_cd());
+        let app_cd = app_cd();
 
+        let query = Query::builder().app_cd(app_cd);
         let client = client_new_by_api_key();
-        let resp = client.myrequests.get(query_params).await;
+        let resp = client.myrequests.get(query).await;
         assert_eq!(true, resp.is_ok());
 
-        let mut query_params = HashMap::new();
-        query_params.insert("app_cd".to_string(), app_cd());
-
+        let query = Query::builder().app_cd(app_cd);
         let client = client_new_by_password();
-        let resp = client.myrequests.get(query_params).await;
+        let resp = client.myrequests.get(query).await;
         assert_eq!(true, resp.is_ok());
     }
 
     #[tokio::test]
     async fn mydrafts_works() {
-        let mut query_params = HashMap::new();
-        query_params.insert("app_cd".to_string(), app_cd());
+        let app_cd = app_cd();
 
+        let query = Query::builder().app_cd(app_cd);
         let client = client_new_by_api_key();
-        let resp = client.mydrafts.get(query_params).await;
+        let resp = client.mydrafts.get(query).await;
         assert_eq!(true, resp.is_ok());
 
-        let mut query_params = HashMap::new();
-        query_params.insert("app_cd".to_string(), app_cd());
-
+        let query = Query::builder().app_cd(app_cd);
         let client = client_new_by_password();
-        let resp = client.mydrafts.get(query_params).await;
+        let resp = client.mydrafts.get(query).await;
         assert_eq!(true, resp.is_ok());
     }
 
     #[tokio::test]
     async fn myprocesses_works() {
-        let mut query_params = HashMap::new();
-        query_params.insert("app_cd".to_string(), app_cd());
+        let app_cd = app_cd();
 
+        let query = Query::builder().app_cd(app_cd);
         let client = client_new_by_api_key();
-        let resp = client.myprocesses.get(query_params).await;
+        let resp = client.myprocesses.get(query).await;
         assert_eq!(true, resp.is_ok());
 
-        let mut query_params = HashMap::new();
-        query_params.insert("app_cd".to_string(), app_cd());
-
+        let query = Query::builder().app_cd(app_cd);
         let client = client_new_by_password();
-        let resp = client.myprocesses.get(query_params).await;
+        let resp = client.myprocesses.get(query).await;
         assert_eq!(true, resp.is_ok());
     }
 
     #[tokio::test]
     async fn forms_works() {
-        let mut query_params = HashMap::new();
-        query_params.insert("app_cd".to_string(), app_cd());
+        let app_cd = app_cd();
 
+        let query = Query::builder().app_cd(app_cd);
         let client = client_new_by_api_key();
-        let resp = client.forms.get(query_params).await;
+        let resp = client.forms.get(query).await;
         assert_eq!(true, resp.is_ok());
 
-        let mut query_params = HashMap::new();
-        query_params.insert("app_cd".to_string(), app_cd());
-
+        let query = Query::builder().app_cd(app_cd);
         let client = client_new_by_password();
-        let resp = client.forms.get(query_params).await;
+        let resp = client.forms.get(query).await;
         assert_eq!(true, resp.is_ok());
     }
 
     #[tokio::test]
     async fn form_parts_works() {
+        let app_cd = app_cd();
         let form_id = form_id();
         let form_version = form_version();
 
-        let mut query_params = HashMap::new();
-        query_params.insert("app_cd".to_string(), app_cd());
-
+        let query = Query::builder().app_cd(app_cd);
         let client = client_new_by_api_key();
-        let resp = client
-            .form_parts
-            .get(form_id, form_version, query_params)
-            .await;
+        let resp = client.form_parts.get(form_id, form_version, query).await;
         assert_eq!(true, resp.is_ok());
 
-        let mut query_params = HashMap::new();
-        query_params.insert("app_cd".to_string(), app_cd());
-
+        let query = Query::builder().app_cd(app_cd);
         let client = client_new_by_password();
-        let resp = client
-            .form_parts
-            .get(form_id, form_version, query_params)
-            .await;
+        let resp = client.form_parts.get(form_id, form_version, query).await;
         assert_eq!(true, resp.is_ok());
     }
 
     #[tokio::test]
     async fn form_settings_prints_works() {
+        let app_cd = app_cd();
         let form_id = form_id();
         let form_version = form_version();
 
-        let mut query_params = HashMap::new();
-        query_params.insert("app_cd".to_string(), app_cd());
-
+        let query = Query::builder().app_cd(app_cd);
         let client = client_new_by_api_key();
         let resp = client
             .form_settings_prints
-            .get(form_id, form_version, query_params)
+            .get(form_id, form_version, query)
             .await;
         assert_eq!(true, resp.is_ok());
 
-        let mut query_params = HashMap::new();
-        query_params.insert("app_cd".to_string(), app_cd());
-
+        let query = Query::builder().app_cd(app_cd);
         let client = client_new_by_password();
         let resp = client
             .form_settings_prints
-            .get(form_id, form_version, query_params)
+            .get(form_id, form_version, query)
             .await;
         assert_eq!(true, resp.is_ok());
     }
 
     #[tokio::test]
     async fn users_works() {
-        let query_params = HashMap::new();
-
+        let query = Query::default();
         let client = client_new_by_api_key();
-        let resp = client.users.get(query_params).await;
+        let resp = client.users.get(query).await;
         assert_eq!(true, resp.is_ok());
 
-        let query_params = HashMap::new();
-
+        let query = Query::default();
         let client = client_new_by_password();
-        let resp = client.users.get(query_params).await;
+        let resp = client.users.get(query).await;
         assert_eq!(true, resp.is_ok());
     }
 
     #[tokio::test]
     async fn user_works() {
-        let query_params = HashMap::new();
-
+        let query = Query::default();
         let client = client_new_by_api_key();
-        let resp = client.user.get(user_unique_id(), query_params).await;
+        let resp = client.user.get(user_unique_id(), query).await;
         assert_eq!(true, resp.is_ok());
 
-        let query_params = HashMap::new();
-
+        let query = Query::default();
         let client = client_new_by_password();
-        let resp = client.user.get(user_unique_id(), query_params).await;
+        let resp = client.user.get(user_unique_id(), query).await;
         assert_eq!(true, resp.is_ok());
     }
 
     #[tokio::test]
     async fn groups_works() {
-        let query_params = HashMap::new();
-
+        let query = Query::default();
         let client = client_new_by_api_key();
-        let resp = client.groups.get(query_params).await;
+        let resp = client.groups.get(query).await;
         assert_eq!(true, resp.is_ok());
 
-        let query_params = HashMap::new();
-
+        let query = Query::default();
         let client = client_new_by_password();
-        let resp = client.groups.get(query_params).await;
+        let resp = client.groups.get(query).await;
         assert_eq!(true, resp.is_ok());
     }
 
@@ -360,31 +322,27 @@ mod tests {
     async fn group_works() {
         let group_id = group_id();
 
-        let query_params = HashMap::new();
-
+        let query = Query::default();
         let client = client_new_by_api_key();
-        let resp = client.group.get(&group_id, query_params).await;
+        let resp = client.group.get(&group_id, query).await;
         assert_eq!(true, resp.is_ok());
 
-        let query_params = HashMap::new();
-
+        let query = Query::default();
         let client = client_new_by_password();
-        let resp = client.group.get(&group_id, query_params).await;
+        let resp = client.group.get(&group_id, query).await;
         assert_eq!(true, resp.is_ok());
     }
 
     #[tokio::test]
     async fn titles_works() {
-        let query_params = HashMap::new();
-
+        let query = Query::default();
         let client = client_new_by_api_key();
-        let resp = client.titles.get(query_params).await;
+        let resp = client.titles.get(query).await;
         assert_eq!(true, resp.is_ok());
 
-        let query_params = HashMap::new();
-
+        let query = Query::default();
         let client = client_new_by_password();
-        let resp = client.titles.get(query_params).await;
+        let resp = client.titles.get(query).await;
         assert_eq!(true, resp.is_ok());
     }
 
@@ -392,16 +350,59 @@ mod tests {
     async fn title_works() {
         let title_id = title_id();
 
-        let query_params = HashMap::new();
+        let query = Query::default();
+        let client = client_new_by_api_key();
+        let resp = client.title.get(&title_id, query).await;
+        assert_eq!(true, resp.is_ok());
+
+        let query = Query::default();
+        let client = client_new_by_password();
+        let resp = client.title.get(&title_id, query).await;
+        assert_eq!(true, resp.is_ok());
+    }
+
+    #[tokio::test]
+    async fn clone_client_works() {
+        let document_id = document_id();
+
+        let query = Query::builder().app_cd(1);
 
         let client = client_new_by_api_key();
-        let resp = client.title.get(&title_id, query_params).await;
+        let cloned_client = client.clone();
+
+        let resp = client.document.get(document_id, query.clone()).await;
         assert_eq!(true, resp.is_ok());
 
-        let query_params = HashMap::new();
-
-        let client = client_new_by_password();
-        let resp = client.title.get(&title_id, query_params).await;
+        let resp = cloned_client.document.get(document_id, query).await;
         assert_eq!(true, resp.is_ok());
+    }
+
+    #[tokio::test]
+    async fn anyhow_works() -> anyhow::Result<()> {
+        let document_id = document_id();
+
+        let query = Query::builder().app_cd(1);
+
+        let client = client_new_by_api_key();
+        let resp = client.document.get(document_id, query).await?;
+        assert_eq!(200u16, resp.status);
+
+        Ok(())
+    }
+
+    #[test]
+    fn query_works() {
+        let query = Query::builder()
+            .app_cd(1)
+            .offset(10)
+            .limit(10)
+            .current(true)
+            .category_id(1)
+            .detail(false)
+            .key("userid");
+        assert_eq!(78, query.to_string().len());
+
+        let empty_query = Query::builder();
+        assert_eq!(true, empty_query.to_string().is_empty());
     }
 }

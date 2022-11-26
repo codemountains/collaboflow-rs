@@ -1,11 +1,11 @@
 use crate::authorization::HEADER_KEY;
-use crate::query::query_string;
 use crate::response::error::{ErrorResponse, ErrorResponseBody};
 use crate::response::mystatus::mydeterms::{GetMyDetermsResponse, GetMyDetermsResponseBody};
-use std::collections::HashMap;
+use crate::Query;
 
 const RESOURCE: &str = "mydeterms";
 
+#[derive(Debug, Clone)]
 pub struct MyDeterms {
     url: String,
     authorization_header: String,
@@ -19,11 +19,8 @@ impl MyDeterms {
         }
     }
 
-    pub async fn get(
-        &self,
-        query_params: HashMap<String, String>,
-    ) -> Result<GetMyDetermsResponse, ErrorResponse> {
-        let request_url = format!("{}?{}", &self.url, query_string(query_params));
+    pub async fn get(&self, query: Query) -> Result<GetMyDetermsResponse, ErrorResponse> {
+        let request_url = format!("{}?{}", &self.url, query);
 
         let http_client = reqwest::Client::new();
         let result = http_client

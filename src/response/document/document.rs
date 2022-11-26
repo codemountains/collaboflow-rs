@@ -2,13 +2,13 @@ use crate::response::RequestTitle;
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Deserialize, Clone, Serialize)]
-pub struct GetDocumentsResponse {
+pub struct GetDocumentResponse {
     pub status: u16,
-    pub body: GetDocumentsResponseBody,
+    pub body: GetDocumentResponseBody,
 }
 
 #[derive(Debug, Deserialize, Clone, Serialize)]
-pub struct GetDocumentsResponseBody {
+pub struct GetDocumentResponseBody {
     pub app_cd: i32,
     pub processes_id: i32,
     pub document_id: i32,

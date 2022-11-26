@@ -1,17 +1,17 @@
 use crate::authorization::HEADER_KEY;
-use crate::query::query_string;
-use crate::response::document::documents::{GetDocumentsResponse, GetDocumentsResponseBody};
+use crate::response::document::document::{GetDocumentResponse, GetDocumentResponseBody};
 use crate::response::error::{ErrorResponse, ErrorResponseBody};
-use std::collections::HashMap;
+use crate::Query;
 
 const RESOURCE: &str = "documents";
 
-pub struct Documents {
+#[derive(Debug, Clone)]
+pub struct Document {
     url: String,
     authorization_header: String,
 }
 
-impl Documents {
+impl Document {
     pub fn new(url: &str, authorization_header: &str) -> Self {
         Self {
             url: url.to_string() + RESOURCE,
@@ -22,14 +22,9 @@ impl Documents {
     pub async fn get(
         &self,
         document_id: i32,
-        query_params: HashMap<String, String>,
-    ) -> Result<GetDocumentsResponse, ErrorResponse> {
-        let request_url = format!(
-            "{}/{}?{}",
-            &self.url,
-            document_id,
-            query_string(query_params)
-        );
+        query: Query,
+    ) -> Result<GetDocumentResponse, ErrorResponse> {
+        let request_url = format!("{}/{}?{}", &self.url, document_id, query);
 
         let http_client = reqwest::Client::new();
         let result = http_client
@@ -43,8 +38,8 @@ impl Documents {
                 let status = resp.status().as_u16();
 
                 if status == 200 {
-                    match resp.json::<GetDocumentsResponseBody>().await {
-                        Ok(body) => Ok(GetDocumentsResponse { status, body }),
+                    match resp.json::<GetDocumentResponseBody>().await {
+                        Ok(body) => Ok(GetDocumentResponse { status, body }),
                         Err(err) => {
                             let body = ErrorResponseBody {
                                 error: true,
