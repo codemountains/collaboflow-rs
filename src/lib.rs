@@ -354,16 +354,14 @@ mod tests {
     async fn title_works() {
         let title_id = title_id();
 
-        let query_params = HashMap::new();
-
+        let query = Query::default();
         let client = client_new_by_api_key();
-        let resp = client.title.get(&title_id, query_params).await;
+        let resp = client.title.get(&title_id, query).await;
         assert_eq!(true, resp.is_ok());
 
-        let query_params = HashMap::new();
-
+        let query = Query::default();
         let client = client_new_by_password();
-        let resp = client.title.get(&title_id, query_params).await;
+        let resp = client.title.get(&title_id, query).await;
         assert_eq!(true, resp.is_ok());
     }
 
