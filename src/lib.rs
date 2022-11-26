@@ -333,16 +333,15 @@ mod tests {
     async fn group_works() {
         let group_id = group_id();
 
-        let query_params = HashMap::new();
-
+        let query = Query::default();
+        println!("{:?}", query);
         let client = client_new_by_api_key();
-        let resp = client.group.get(&group_id, query_params).await;
+        let resp = client.group.get(&group_id, query).await;
         assert_eq!(true, resp.is_ok());
 
-        let query_params = HashMap::new();
-
+        let query = Query::default();
         let client = client_new_by_password();
-        let resp = client.group.get(&group_id, query_params).await;
+        let resp = client.group.get(&group_id, query).await;
         assert_eq!(true, resp.is_ok());
     }
 
