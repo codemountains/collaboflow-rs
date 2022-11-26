@@ -1,8 +1,7 @@
 use crate::authorization::HEADER_KEY;
-use crate::query::query_string;
 use crate::response::document::document::{GetDocumentResponse, GetDocumentResponseBody};
 use crate::response::error::{ErrorResponse, ErrorResponseBody};
-use std::collections::HashMap;
+use crate::Query;
 
 const RESOURCE: &str = "documents";
 
@@ -23,14 +22,9 @@ impl Document {
     pub async fn get(
         &self,
         document_id: i32,
-        query_params: HashMap<String, String>,
+        query: Query,
     ) -> Result<GetDocumentResponse, ErrorResponse> {
-        let request_url = format!(
-            "{}/{}?{}",
-            &self.url,
-            document_id,
-            query_string(query_params)
-        );
+        let request_url = format!("{}/{}?{}", &self.url, document_id, query.to_string());
 
         let http_client = reqwest::Client::new();
         let result = http_client
