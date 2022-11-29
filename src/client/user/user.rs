@@ -22,7 +22,7 @@ impl User {
 
     pub async fn get(
         &self,
-        user_id: String,
+        user_id: &str,
         query: Query,
     ) -> Result<GetUserResponse, ErrorResponse> {
         let request_url = format!("{}/{}?{}", &self.url, user_id, query);

@@ -18,13 +18,15 @@ async fn users_works() {
 
 #[tokio::test]
 async fn user_works() {
+    let user_id = user_unique_id();
+
     let query = Query::default();
     let client = client_with_api_key();
-    let resp = client.user.get(user_unique_id(), query).await;
+    let resp = client.user.get(&user_id, query).await;
     assert_eq!(true, resp.is_ok());
 
     let query = Query::default();
     let client = client_with_password();
-    let resp = client.user.get(user_unique_id(), query).await;
+    let resp = client.user.get(&user_id, query).await;
     assert_eq!(true, resp.is_ok());
 }
