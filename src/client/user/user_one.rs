@@ -1,17 +1,18 @@
 use crate::authorization::HEADER_KEY;
-use crate::response::document::document::{GetDocumentResponse, GetDocumentResponseBody};
 use crate::response::error::{ErrorResponse, ErrorResponseBody};
+use crate::response::user::user_one::GetUserResponse;
+use crate::response::user::UserRecord;
 use crate::Query;
 
-const RESOURCE: &str = "documents";
+const RESOURCE: &str = "users";
 
 #[derive(Debug, Clone)]
-pub struct Document {
+pub struct User {
     url: String,
     authorization_header: String,
 }
 
-impl Document {
+impl User {
     pub fn new(url: &str, authorization_header: &str) -> Self {
         Self {
             url: url.to_string() + RESOURCE,
@@ -19,12 +20,8 @@ impl Document {
         }
     }
 
-    pub async fn get(
-        &self,
-        document_id: i32,
-        query: Query,
-    ) -> Result<GetDocumentResponse, ErrorResponse> {
-        let request_url = format!("{}/{}?{}", &self.url, document_id, query);
+    pub async fn get(&self, user_id: &str, query: Query) -> Result<GetUserResponse, ErrorResponse> {
+        let request_url = format!("{}/{}?{}", &self.url, user_id, query);
 
         let http_client = reqwest::Client::new();
         let result = http_client
@@ -38,8 +35,8 @@ impl Document {
                 let status = resp.status().as_u16();
 
                 if status == 200 {
-                    match resp.json::<GetDocumentResponseBody>().await {
-                        Ok(body) => Ok(GetDocumentResponse { status, body }),
+                    match resp.json::<UserRecord>().await {
+                        Ok(body) => Ok(GetUserResponse { status, body }),
                         Err(err) => {
                             let body = ErrorResponseBody {
                                 error: true,

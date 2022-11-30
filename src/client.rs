@@ -1,19 +1,19 @@
 use crate::authorization::Authorization;
-use crate::client::document::document::Document;
 use crate::client::document::document_contents::DocumentContents;
 use crate::client::document::document_determs::DocumentDeterms;
+use crate::client::document::document_one::Document;
 use crate::client::form::form_parts::FormParts;
 use crate::client::form::form_settings_prints::FormSettingsPrints;
 use crate::client::form::forms::Forms;
-use crate::client::group::group::Group;
+use crate::client::group::group_one::Group;
 use crate::client::group::groups::Groups;
 use crate::client::mystatus::mydeterms::MyDeterms;
 use crate::client::mystatus::mydrafts::MyDrafts;
 use crate::client::mystatus::myprocesses::MyProcesses;
 use crate::client::mystatus::myrequests::MyRequests;
-use crate::client::title::title::Title;
+use crate::client::title::title_one::Title;
 use crate::client::title::titles::Titles;
-use crate::client::user::user::User;
+use crate::client::user::user_one::User;
 use crate::client::user::users::Users;
 
 pub mod document;

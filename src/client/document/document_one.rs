@@ -1,18 +1,17 @@
 use crate::authorization::HEADER_KEY;
+use crate::response::document::document_one::{GetDocumentResponse, GetDocumentResponseBody};
 use crate::response::error::{ErrorResponse, ErrorResponseBody};
-use crate::response::group::group::GetGroupResponse;
-use crate::response::group::GroupRecord;
 use crate::Query;
 
-const RESOURCE: &str = "groups";
+const RESOURCE: &str = "documents";
 
 #[derive(Debug, Clone)]
-pub struct Group {
+pub struct Document {
     url: String,
     authorization_header: String,
 }
 
-impl Group {
+impl Document {
     pub fn new(url: &str, authorization_header: &str) -> Self {
         Self {
             url: url.to_string() + RESOURCE,
@@ -22,10 +21,10 @@ impl Group {
 
     pub async fn get(
         &self,
-        group_id: &str,
+        document_id: i32,
         query: Query,
-    ) -> Result<GetGroupResponse, ErrorResponse> {
-        let request_url = format!("{}/{}?{}", &self.url, group_id, query);
+    ) -> Result<GetDocumentResponse, ErrorResponse> {
+        let request_url = format!("{}/{}?{}", &self.url, document_id, query);
 
         let http_client = reqwest::Client::new();
         let result = http_client
@@ -39,8 +38,8 @@ impl Group {
                 let status = resp.status().as_u16();
 
                 if status == 200 {
-                    match resp.json::<GroupRecord>().await {
-                        Ok(body) => Ok(GetGroupResponse { status, body }),
+                    match resp.json::<GetDocumentResponseBody>().await {
+                        Ok(body) => Ok(GetDocumentResponse { status, body }),
                         Err(err) => {
                             let body = ErrorResponseBody {
                                 error: true,
