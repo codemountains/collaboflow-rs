@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-pub mod user;
+pub mod user_one;
 pub mod users;
 
 #[derive(Debug, Deserialize, Clone, Serialize)]

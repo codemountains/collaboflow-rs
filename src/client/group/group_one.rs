@@ -1,6 +1,6 @@
 use crate::authorization::HEADER_KEY;
 use crate::response::error::{ErrorResponse, ErrorResponseBody};
-use crate::response::group::group::GetGroupResponse;
+use crate::response::group::group_one::GetGroupResponse;
 use crate::response::group::GroupRecord;
 use crate::Query;
 

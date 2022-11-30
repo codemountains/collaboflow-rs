@@ -1,6 +1,6 @@
 use crate::authorization::HEADER_KEY;
 use crate::response::error::{ErrorResponse, ErrorResponseBody};
-use crate::response::title::title::GetTitleResponse;
+use crate::response::title::title_one::GetTitleResponse;
 use crate::response::title::TitleRecord;
 use crate::Query;
 
