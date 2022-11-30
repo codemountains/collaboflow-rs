@@ -1,5 +1,21 @@
 use std::fmt;
 
+/// Generate a query string.
+///
+/// ## Usage
+///
+/// ```rust
+/// # use collaboflow_rs::{Query};
+///
+/// let query = Query::builder()
+///     .app_cd(1)
+///     .offset(0)
+///     .limit(10);
+/// ```
+///
+/// ## Notes
+///
+/// Query `fields` is not supported.
 #[derive(Debug, Clone, Default)]
 pub struct Query {
     pub app_cd: Option<i32>,
