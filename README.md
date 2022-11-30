@@ -37,24 +37,24 @@ use collaboflow_rs::{Authorization, CollaboflowClient, Query};
 
 #[tokio::main]
 async fn main() -> Result<(), ()> {
-  let authorization = Authorization::with_api_key("User id", "API key");
+    let authorization = Authorization::with_api_key("User id", "API key");
 
-  let client = CollaboflowClient::new("https://{Collaboflow url}/{Instance name}/api/index.cfm/v1/", authorization);
-  
-  let query = Query::builder().app_cd(1); // Your app cd
+    let client = CollaboflowClient::new("https://{Collaboflow url}/{Instance name}/api/index.cfm/v1/", authorization);
 
-  let document_id: i32 = 1; // Your document id
-  let result = client.document.get(document_id, query).await;
-  match result {
-    Ok(resp) => {
-      println!("{:?}", resp);
-      Ok(())
-    },
-    Err(err) => {
-      println!("{:?}", err);
-      Err(())
+    let query = Query::builder().app_cd(1); // Your app cd
+
+    let document_id: i32 = 1; // Your document id
+    let result = client.document.get(document_id, query).await;
+    match result {
+        Ok(resp) => {
+            println!("{:?}", resp);
+            Ok(())
+        },
+        Err(err) => {
+            println!("{:?}", err);
+            Err(())
+        }
     }
-  }
 }
 ```
 
