@@ -3,17 +3,36 @@ use std::fmt;
 
 pub const HEADER_KEY: &str = "X-Collaboflow-Authorization";
 
-#[derive(Debug, Clone)]
-pub enum AuthorizationType {
-    ApiKey,
-    Password,
-}
-
+/// Generate your own authentication headers to access the Collaboflow REST API.
+///
+/// ## Usage
+///
+/// ### API Key
+///
+/// ```rust
+/// # use collaboflow_rs::{Authorization};
+///
+/// let authorization = Authorization::with_api_key("User id", "Api key");
+/// ```
+///
+/// ### Password
+///
+/// ```rust
+/// # use collaboflow_rs::{Authorization};
+///
+/// let authorization = Authorization::with_password("User id", "Password");
+/// ```
 #[derive(Debug, Clone)]
 pub struct Authorization {
     authorization_type: AuthorizationType,
     user_id: String,
     value: String,
+}
+
+#[derive(Debug, Clone)]
+pub enum AuthorizationType {
+    ApiKey,
+    Password,
 }
 
 impl Authorization {
