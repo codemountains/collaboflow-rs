@@ -24,6 +24,40 @@ To use the driver in your application, simply add it to your project's `Cargo.to
 collaboflow-rs = "0.0.4"
 ```
 
+### Example Usage
+
+```toml
+[dependencies]
+collaboflow-rs = "0.0.5"
+tokio = "1.22.0"
+```
+
+```rust
+use collaboflow_rs::{Authorization, CollaboflowClient, Query};
+
+#[tokio::main]
+async fn main() -> Result<(), ()> {
+  let authorization = Authorization::with_api_key("User id", "API key");
+
+  let client = CollaboflowClient::new("https://{Collaboflow url}/{Instance name}/api/index.cfm/v1/", authorization);
+  
+  let query = Query::builder().app_cd(1); // Your app cd
+
+  let document_id: i32 = 1; // Your document id
+  let result = client.document.get(document_id, query).await;
+  match result {
+    Ok(resp) => {
+      println!("{:?}", resp);
+      Ok(())
+    },
+    Err(err) => {
+      println!("{:?}", err);
+      Err(())
+    }
+  }
+}
+```
+
 ## Support APIs
 
 ### Document
