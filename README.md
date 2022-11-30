@@ -24,7 +24,7 @@ To use the driver in your application, simply add it to your project's `Cargo.to
 collaboflow-rs = "0.0.4"
 ```
 
-### Example Usage
+## Example Usage
 
 ```toml
 [dependencies]
