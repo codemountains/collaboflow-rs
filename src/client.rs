@@ -23,6 +23,16 @@ pub mod mystatus;
 pub mod title;
 pub mod user;
 
+/// This is the main entry point for the Collaboflow REST API. A `Client` is used to connect to a Collaboflow.
+///
+/// ## Usage
+///
+/// ```rust
+/// # use collaboflow_rs::{Authorization, CollaboflowClient};
+///
+/// let authorization = Authorization::with_api_key("User id", "Api key");
+/// let client = CollaboflowClient::new("Collaboflow url", authorization);
+/// ```
 #[derive(Debug, Clone)]
 pub struct CollaboflowClient {
     pub document: Document,
