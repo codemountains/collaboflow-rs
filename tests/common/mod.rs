@@ -17,6 +17,7 @@ const USER_UNIQUE_ID: &str = "USER_UNIQUE_ID";
 const GROUP_ID: &str = "GROUP_ID";
 const TITLE_ID: &str = "TITLE_ID";
 const PROCESSES_ID: &str = "PROCESSES_ID";
+const USER_GROUP_CODE: &str = "USER_GROUP_CODE";
 
 pub fn client(auth_type: AuthorizationType) -> CollaboflowClient {
     dotenv().ok();
@@ -114,4 +115,9 @@ pub fn processes_id() -> i32 {
         .as_str()
         .parse::<i32>()
         .expect(format!("{} is not a number.", PROCESSES_ID).as_str())
+}
+
+pub fn user_group_code() -> String {
+    dotenv().ok();
+    env::var(USER_GROUP_CODE).expect(format!("{} is undefined.", USER_GROUP_CODE).as_str())
 }
