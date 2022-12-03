@@ -27,3 +27,8 @@ pub struct GetDocumentResponseBody {
     pub link: String,
     pub error: bool,
 }
+
+#[derive(Debug, Deserialize, Clone, Serialize)]
+pub struct PutDocumentStatusResponse {
+    pub status: u16,
+}
