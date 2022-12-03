@@ -4,6 +4,7 @@ use crate::common::{app_cd, client_with_api_key, client_with_password, document_
 use collaboflow_rs::request::document::documents::PostDocumentRequest;
 use collaboflow_rs::Query;
 use serde::Serialize;
+use serde_json::json;
 
 #[tokio::test]
 async fn document_post_works() {
@@ -17,7 +18,11 @@ async fn document_post_works() {
     let resp = client.documents.post(request).await;
     assert_eq!(true, resp.is_ok());
 
-    let document = NewDocument::new("Password", 1, 1000);
+    let document = json!({
+        "fid1": "Password",
+        "fid2": 999,
+        "fid3": 54321,
+    });
     let request = PostDocumentRequest::new(processes_id, None, None, None, app_cd, None, document);
 
     let client = client_with_password();
