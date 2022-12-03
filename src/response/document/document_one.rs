@@ -32,3 +32,8 @@ pub struct GetDocumentResponseBody {
 pub struct PutDocumentStatusResponse {
     pub status: u16,
 }
+
+#[derive(Debug, Deserialize, Clone, Serialize)]
+pub struct DeleteDocumentResponse {
+    pub status: u16,
+}
