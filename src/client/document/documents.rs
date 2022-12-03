@@ -1,5 +1,7 @@
 use crate::authorization::HEADER_KEY;
 use crate::request::document::documents::PostDocumentRequest;
+use crate::response::document::documents::{PostDocumentResponse, PostDocumentResponseBody};
+use crate::response::error::{ErrorResponse, ErrorResponseBody};
 use serde::Serialize;
 
 const RESOURCE: &str = "documents";
@@ -18,7 +20,10 @@ impl Documents {
         }
     }
 
-    pub async fn post<T: Serialize>(&self, request: PostDocumentRequest<T>) -> Result<(), ()> {
+    pub async fn post<T: Serialize>(
+        &self,
+        request: PostDocumentRequest<T>,
+    ) -> Result<PostDocumentResponse, ErrorResponse> {
         let request_url = format!("{}", &self.url);
 
         let http_client = reqwest::Client::new();
@@ -30,10 +35,46 @@ impl Documents {
             .await;
 
         match result {
-            Ok(resp) => println!("{:?}", resp.text().await),
-            Err(err) => println!("{:?}", err),
-        }
+            Ok(resp) => {
+                let status = resp.status().as_u16();
 
-        Ok(())
+                if status == 201 {
+                    match resp.json::<PostDocumentResponseBody>().await {
+                        Ok(body) => Ok(PostDocumentResponse { status, body }),
+                        Err(err) => {
+                            let body = ErrorResponseBody {
+                                error: true,
+                                messages: vec![err.to_string()],
+                            };
+                            let error_response = ErrorResponse { status, body };
+                            Err(error_response)
+                        }
+                    }
+                } else {
+                    match resp.json::<ErrorResponseBody>().await {
+                        Ok(body) => {
+                            let error_response = ErrorResponse { status, body };
+                            Err(error_response)
+                        }
+                        Err(err) => {
+                            let body = ErrorResponseBody {
+                                error: true,
+                                messages: vec![err.to_string()],
+                            };
+                            let error_response = ErrorResponse { status, body };
+                            Err(error_response)
+                        }
+                    }
+                }
+            }
+            Err(err) => {
+                let body = ErrorResponseBody {
+                    error: true,
+                    messages: vec![err.to_string()],
+                };
+                let error_response = ErrorResponse { status: 500, body };
+                Err(error_response)
+            }
+        }
     }
 }
