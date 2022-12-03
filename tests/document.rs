@@ -72,9 +72,37 @@ async fn document_put_works() {
                 "request", None, None, None, None, None,
             );
             let resp = client.document.put(document_id, query, request).await;
-            println!("{:?}", resp);
+            assert_eq!(true, resp.is_ok());
         }
-        Err(err) => println!("{:?}", err),
+        Err(err) => assert_ne!(200, err.status),
+    }
+}
+
+#[tokio::test]
+async fn document_delete_works() {
+    let app_cd = app_cd();
+    let processes_id = processes_id();
+
+    let document = NewDocument::new("draft to request", 1, 1000);
+    let request = PostDocumentRequest::new(
+        processes_id,
+        None,
+        None,
+        Some("draft"),
+        app_cd,
+        None,
+        document,
+    );
+
+    let client = client_with_api_key();
+    match client.documents.post(request).await {
+        Ok(resp) => {
+            let document_id = resp.body.document_id;
+            let query = Query::builder().app_cd(app_cd);
+            let resp = client.document.delete(document_id, query).await;
+            assert_eq!(true, resp.is_ok());
+        }
+        Err(err) => assert_ne!(200, err.status),
     }
 }
 
