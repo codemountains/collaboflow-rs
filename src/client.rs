@@ -2,6 +2,7 @@ use crate::authorization::Authorization;
 use crate::client::document::document_contents::DocumentContents;
 use crate::client::document::document_determs::DocumentDeterms;
 use crate::client::document::document_one::Document;
+use crate::client::document::documents::Documents;
 use crate::client::form::form_parts::FormParts;
 use crate::client::form::form_settings_prints::FormSettingsPrints;
 use crate::client::form::forms::Forms;
@@ -35,6 +36,7 @@ pub mod user;
 /// ```
 #[derive(Debug, Clone)]
 pub struct CollaboflowClient {
+    pub documents: Documents,
     pub document: Document,
     pub document_determs: DocumentDeterms,
     pub document_contents: DocumentContents,
@@ -58,6 +60,7 @@ impl CollaboflowClient {
         let authorization_header = &authorization.to_string();
 
         // Document
+        let documents = Documents::new(base_url, authorization_header);
         let document = Document::new(base_url, authorization_header);
         let document_determs = DocumentDeterms::new(base_url, authorization_header);
         let document_contents = DocumentContents::new(base_url, authorization_header);
@@ -86,6 +89,7 @@ impl CollaboflowClient {
         let title = Title::new(base_url, authorization_header);
 
         Self {
+            documents,
             document,
             document_determs,
             document_contents,
