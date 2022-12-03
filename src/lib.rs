@@ -26,7 +26,7 @@
 //! tokio = "1.22.0"
 //! ```
 //!
-//! ```rust,ignore
+//! ```rust,no_run
 //! use collaboflow_rs::{Authorization, CollaboflowClient, Query};
 //!
 //! #[tokio::main]

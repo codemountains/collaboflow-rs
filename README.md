@@ -64,6 +64,7 @@ async fn main() -> Result<(), ()> {
 
 - [getDocumentOverview](http://docs.collaboflow.com/api-docs/#/Document/getDocumentOverview)
 - [requestDocument](http://docs.collaboflow.com/api-docs/#/Document/requestDocument)
+- [putDocumentStatus](http://docs.collaboflow.com/api-docs/#/Document/putDocumentStatus)
 - [getDeterms](http://docs.collaboflow.com/api-docs/#/Document/getDeterms)
 - [getDocumentContents](http://docs.collaboflow.com/api-docs/#/Document/getDocumentContents)
 

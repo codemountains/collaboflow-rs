@@ -40,6 +40,33 @@ impl Query {
         }
     }
 
+    pub fn to_queries(&self) -> Vec<(String, String)> {
+        let mut queries: Vec<(String, String)> = Vec::new();
+        if let Some(app_cd) = self.app_cd {
+            queries.push(("app_cd".to_string(), app_cd.to_string()));
+        }
+        if let Some(offset) = self.offset {
+            queries.push(("offset".to_string(), offset.to_string()));
+        }
+        if let Some(limit) = self.limit {
+            queries.push(("limit".to_string(), limit.to_string()));
+        }
+        if let Some(current) = self.current {
+            queries.push(("current".to_string(), current.to_string()));
+        }
+        if let Some(category_id) = self.category_id {
+            queries.push(("category_id".to_string(), category_id.to_string()));
+        }
+        if let Some(detail) = self.detail {
+            queries.push(("detail".to_string(), detail.to_string()));
+        }
+        if let Some(key) = &self.key {
+            queries.push(("key".to_string(), key.to_string()));
+        }
+
+        queries
+    }
+
     pub fn app_cd(mut self, app_cd: i32) -> Self {
         self.app_cd = Some(app_cd);
         self
