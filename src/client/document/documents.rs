@@ -1,6 +1,6 @@
 use crate::authorization::HEADER_KEY;
-use crate::request::document::documents::PostDocumentRequest;
-use crate::response::document::documents::{PostDocumentResponse, PostDocumentResponseBody};
+use crate::request::document::documents::PostDocumentsRequest;
+use crate::response::document::documents::{PostDocumentsResponse, PostDocumentsResponseBody};
 use crate::response::error::{ErrorResponse, ErrorResponseBody};
 use serde::Serialize;
 
@@ -22,8 +22,8 @@ impl Documents {
 
     pub async fn post<T: Serialize>(
         &self,
-        request: PostDocumentRequest<T>,
-    ) -> Result<PostDocumentResponse, ErrorResponse> {
+        request: PostDocumentsRequest<T>,
+    ) -> Result<PostDocumentsResponse, ErrorResponse> {
         let request_url = format!("{}", &self.url);
 
         let http_client = reqwest::Client::new();
@@ -39,8 +39,8 @@ impl Documents {
                 let status = resp.status().as_u16();
 
                 if status == 201 {
-                    match resp.json::<PostDocumentResponseBody>().await {
-                        Ok(body) => Ok(PostDocumentResponse { status, body }),
+                    match resp.json::<PostDocumentsResponseBody>().await {
+                        Ok(body) => Ok(PostDocumentsResponse { status, body }),
                         Err(err) => {
                             let body = ErrorResponseBody {
                                 error: true,

@@ -1,13 +1,13 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Deserialize, Clone, Serialize)]
-pub struct PostDocumentResponse {
+pub struct PostDocumentsResponse {
     pub status: u16,
-    pub body: PostDocumentResponseBody,
+    pub body: PostDocumentsResponseBody,
 }
 
 #[derive(Debug, Deserialize, Clone, Serialize)]
-pub struct PostDocumentResponseBody {
+pub struct PostDocumentsResponseBody {
     pub error: bool,
     pub app_cd: i32,
     pub processes_id: i32,

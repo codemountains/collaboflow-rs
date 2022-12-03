@@ -2,7 +2,7 @@ mod common;
 
 use crate::common::{app_cd, client_with_api_key, client_with_password, document_id, processes_id};
 use collaboflow_rs::request::document::document_one::PutDocumentStatusRequest;
-use collaboflow_rs::request::document::documents::PostDocumentRequest;
+use collaboflow_rs::request::document::documents::PostDocumentsRequest;
 use collaboflow_rs::Query;
 use serde::Serialize;
 use serde_json::json;
@@ -13,7 +13,7 @@ async fn document_post_works() {
     let processes_id = processes_id();
 
     let document = NewDocument::new("API KEY", 1, 1000);
-    let request = PostDocumentRequest::new(processes_id, None, None, None, app_cd, None, document);
+    let request = PostDocumentsRequest::new(processes_id, None, None, None, app_cd, None, document);
 
     let client = client_with_api_key();
     let resp = client.documents.post(request).await;
@@ -24,7 +24,7 @@ async fn document_post_works() {
         "fid2": 999,
         "fid3": 54321,
     });
-    let request = PostDocumentRequest::new(processes_id, None, None, None, app_cd, None, document);
+    let request = PostDocumentsRequest::new(processes_id, None, None, None, app_cd, None, document);
 
     let client = client_with_password();
     let resp = client.documents.post(request).await;
@@ -53,7 +53,7 @@ async fn document_put_works() {
     let processes_id = processes_id();
 
     let document = NewDocument::new("draft to request", 1, 1000);
-    let request = PostDocumentRequest::new(
+    let request = PostDocumentsRequest::new(
         processes_id,
         None,
         None,
@@ -84,7 +84,7 @@ async fn document_delete_works() {
     let processes_id = processes_id();
 
     let document = NewDocument::new("draft to request", 1, 1000);
-    let request = PostDocumentRequest::new(
+    let request = PostDocumentsRequest::new(
         processes_id,
         None,
         None,

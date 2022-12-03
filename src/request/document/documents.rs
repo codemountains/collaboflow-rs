@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
-pub struct PostDocumentRequest<T>
+pub struct PostDocumentsRequest<T>
 where
     T: Serialize,
 {
@@ -15,7 +15,7 @@ where
     _phantom: std::marker::PhantomData<T>,
 }
 
-impl<T: Serialize> PostDocumentRequest<T> {
+impl<T: Serialize> PostDocumentsRequest<T> {
     pub fn new(
         processes_id: i32,
         request_userid: Option<&str>,
