@@ -1,6 +1,8 @@
 use crate::authorization::HEADER_KEY;
 use crate::request::document::document_one::PutDocumentStatusRequest;
-use crate::response::document::document_one::{DeleteDocumentResponse, GetDocumentResponse, GetDocumentResponseBody, PutDocumentStatusResponse};
+use crate::response::document::document_one::{
+    DeleteDocumentResponse, GetDocumentResponse, GetDocumentResponseBody, PutDocumentStatusResponse,
+};
 use crate::response::error::{ErrorResponse, ErrorResponseBody};
 use crate::Query;
 use serde::Serialize;
