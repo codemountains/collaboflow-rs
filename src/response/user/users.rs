@@ -15,3 +15,9 @@ pub struct GetUsersResponseBody {
     pub error: bool,
     pub records: Vec<UserRecord>,
 }
+
+#[derive(Debug, Deserialize, Clone, Serialize)]
+pub struct PostUsersResponse {
+    pub status: u16,
+    pub body: UserRecord,
+}

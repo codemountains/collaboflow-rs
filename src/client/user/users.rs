@@ -1,6 +1,8 @@
 use crate::authorization::HEADER_KEY;
+use crate::request::user::users::PostUsersRequest;
 use crate::response::error::{ErrorResponse, ErrorResponseBody};
-use crate::response::user::users::{GetUsersResponse, GetUsersResponseBody};
+use crate::response::user::users::{GetUsersResponse, GetUsersResponseBody, PostUsersResponse};
+use crate::response::user::UserRecord;
 use crate::Query;
 
 const RESOURCE: &str = "users";
@@ -36,6 +38,64 @@ impl Users {
                 if status == 200 {
                     match resp.json::<GetUsersResponseBody>().await {
                         Ok(body) => Ok(GetUsersResponse { status, body }),
+                        Err(err) => {
+                            let body = ErrorResponseBody {
+                                error: true,
+                                messages: vec![err.to_string()],
+                            };
+                            let error_response = ErrorResponse { status, body };
+                            Err(error_response)
+                        }
+                    }
+                } else {
+                    match resp.json::<ErrorResponseBody>().await {
+                        Ok(body) => {
+                            let error_response = ErrorResponse { status, body };
+                            Err(error_response)
+                        }
+                        Err(err) => {
+                            let body = ErrorResponseBody {
+                                error: true,
+                                messages: vec![err.to_string()],
+                            };
+                            let error_response = ErrorResponse { status, body };
+                            Err(error_response)
+                        }
+                    }
+                }
+            }
+            Err(err) => {
+                let body = ErrorResponseBody {
+                    error: true,
+                    messages: vec![err.to_string()],
+                };
+                let error_response = ErrorResponse { status: 500, body };
+                Err(error_response)
+            }
+        }
+    }
+
+    pub async fn post(
+        &self,
+        request: PostUsersRequest,
+    ) -> Result<PostUsersResponse, ErrorResponse> {
+        let request_url = format!("{}", &self.url);
+
+        let http_client = reqwest::Client::new();
+        let result = http_client
+            .post(request_url)
+            .json(&request)
+            .header(HEADER_KEY, &self.authorization_header)
+            .send()
+            .await;
+
+        match result {
+            Ok(resp) => {
+                let status = resp.status().as_u16();
+
+                if status == 201 {
+                    match resp.json::<UserRecord>().await {
+                        Ok(body) => Ok(PostUsersResponse { status, body }),
                         Err(err) => {
                             let body = ErrorResponseBody {
                                 error: true,
