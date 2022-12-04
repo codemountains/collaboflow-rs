@@ -15,3 +15,9 @@ pub struct GetTitlesResponseBody {
     pub error: bool,
     pub records: Vec<TitleRecord>,
 }
+
+#[derive(Debug, Deserialize, Clone, Serialize)]
+pub struct PostTitlesResponse {
+    pub status: u16,
+    pub body: TitleRecord,
+}
