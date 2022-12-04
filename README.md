@@ -101,6 +101,7 @@ async fn main() -> Result<(), ()> {
 
 - [getTitles](http://docs.collaboflow.com/api-docs/#/Title/getTitles)
   - Query `fields` is not supported.
+- [postTitle](http://docs.collaboflow.com/api-docs/#/Title/postTitle)
 - [getTitle](http://docs.collaboflow.com/api-docs/#/Title/getTitle)
 
 ## LICENSE
