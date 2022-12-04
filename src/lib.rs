@@ -26,7 +26,7 @@
 //! tokio = "1.22.0"
 //! ```
 //!
-//! ```rust,ignore
+//! ```rust,no_run
 //! use collaboflow_rs::{Authorization, CollaboflowClient, Query};
 //!
 //! #[tokio::main]
@@ -94,6 +94,8 @@
 pub mod authorization;
 pub mod client;
 pub mod query;
+pub mod record;
+pub mod request;
 pub mod response;
 
 pub use authorization::Authorization;

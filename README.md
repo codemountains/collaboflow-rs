@@ -21,14 +21,14 @@ To use the driver in your application, simply add it to your project's `Cargo.to
 
 ```toml
 [dependencies]
-collaboflow-rs = "0.0.7"
+collaboflow-rs = "0.0.8"
 ```
 
 ## Example Usage
 
 ```toml
 [dependencies]
-collaboflow-rs = "0.0.7"
+collaboflow-rs = "0.0.8"
 tokio = "1.22.0"
 ```
 
@@ -63,6 +63,9 @@ async fn main() -> Result<(), ()> {
 ### Document
 
 - [getDocumentOverview](http://docs.collaboflow.com/api-docs/#/Document/getDocumentOverview)
+- [requestDocument](http://docs.collaboflow.com/api-docs/#/Document/requestDocument)
+- [putDocumentStatus](http://docs.collaboflow.com/api-docs/#/Document/putDocumentStatus)
+- [deleteDocument](http://docs.collaboflow.com/api-docs/#/Document/deleteDocument)
 - [getDeterms](http://docs.collaboflow.com/api-docs/#/Document/getDeterms)
 - [getDocumentContents](http://docs.collaboflow.com/api-docs/#/Document/getDocumentContents)
 
@@ -83,19 +86,28 @@ async fn main() -> Result<(), ()> {
 
 - [getUsers](http://docs.collaboflow.com/api-docs/#/User/getUsers)
   - Query `fields` is not supported.
+- [postUser](http://docs.collaboflow.com/api-docs/#/User/postUser)
 - [getUser](http://docs.collaboflow.com/api-docs/#/User/getUser)
+- [putUser](http://docs.collaboflow.com/api-docs/#/User/putUser)
+- [deleteUser](http://docs.collaboflow.com/api-docs/#/User/deleteUser)
 
 ### Group
 
 - [getGroups](http://docs.collaboflow.com/api-docs/#/Group/getGroups)
   - Query `fields` is not supported.
+- [postGroup](http://docs.collaboflow.com/api-docs/#/Group/postGroup)
 - [getGroup](http://docs.collaboflow.com/api-docs/#/Group/getGroup)
+- [putGroup](http://docs.collaboflow.com/api-docs/#/Group/putGroup)
+- [deleteGroup](http://docs.collaboflow.com/api-docs/#/Group/deleteGroup)
 
 ### Title
 
 - [getTitles](http://docs.collaboflow.com/api-docs/#/Title/getTitles)
   - Query `fields` is not supported.
+- [postTitle](http://docs.collaboflow.com/api-docs/#/Title/postTitle)
 - [getTitle](http://docs.collaboflow.com/api-docs/#/Title/getTitle)
+- [putTitle](http://docs.collaboflow.com/api-docs/#/Title/putTitle)
+- [deleteTitle](http://docs.collaboflow.com/api-docs/#/Title/deleteTitle)
 
 ## LICENSE
 

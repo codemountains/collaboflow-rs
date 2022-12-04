@@ -20,11 +20,12 @@ impl MyDeterms {
     }
 
     pub async fn get(&self, query: Query) -> Result<GetMyDetermsResponse, ErrorResponse> {
-        let request_url = format!("{}?{}", &self.url, query);
+        let request_url = format!("{}", &self.url);
 
         let http_client = reqwest::Client::new();
         let result = http_client
             .get(request_url)
+            .query(&query.to_queries())
             .header(HEADER_KEY, &self.authorization_header)
             .send()
             .await;

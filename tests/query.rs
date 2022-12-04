@@ -16,4 +16,7 @@ fn query_works() {
 
     let empty_query = Query::builder();
     assert_eq!(true, empty_query.to_string().is_empty());
+
+    let queries = query.to_queries();
+    assert_eq!(7, queries.len());
 }

@@ -1,4 +1,4 @@
-use crate::response::title::TitleRecord;
+use crate::record::title::TitleRecord;
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Deserialize, Clone, Serialize)]
@@ -14,4 +14,10 @@ pub struct GetTitlesResponseBody {
     pub total_count: i32,
     pub error: bool,
     pub records: Vec<TitleRecord>,
+}
+
+#[derive(Debug, Deserialize, Clone, Serialize)]
+pub struct PostTitlesResponse {
+    pub status: u16,
+    pub body: TitleRecord,
 }

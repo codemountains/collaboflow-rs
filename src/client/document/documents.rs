@@ -1,17 +1,18 @@
 use crate::authorization::HEADER_KEY;
+use crate::request::document::documents::PostDocumentsRequest;
+use crate::response::document::documents::{PostDocumentsResponse, PostDocumentsResponseBody};
 use crate::response::error::{ErrorResponse, ErrorResponseBody};
-use crate::response::mystatus::myprocesses::{GetMyProcessesResponse, GetMyProcessesResponseBody};
-use crate::Query;
+use serde::Serialize;
 
-const RESOURCE: &str = "myprocesses";
+const RESOURCE: &str = "documents";
 
 #[derive(Debug, Clone)]
-pub struct MyProcesses {
+pub struct Documents {
     url: String,
     authorization_header: String,
 }
 
-impl MyProcesses {
+impl Documents {
     pub fn new(url: &str, authorization_header: &str) -> Self {
         Self {
             url: url.to_string() + RESOURCE,
@@ -19,14 +20,17 @@ impl MyProcesses {
         }
     }
 
-    pub async fn get(&self, query: Query) -> Result<GetMyProcessesResponse, ErrorResponse> {
+    pub async fn post<T: Serialize>(
+        &self,
+        request: PostDocumentsRequest<T>,
+    ) -> Result<PostDocumentsResponse, ErrorResponse> {
         let request_url = format!("{}", &self.url);
 
         let http_client = reqwest::Client::new();
         let result = http_client
-            .get(request_url)
-            .query(&query.to_queries())
+            .post(request_url)
             .header(HEADER_KEY, &self.authorization_header)
+            .json(&request)
             .send()
             .await;
 
@@ -34,9 +38,9 @@ impl MyProcesses {
             Ok(resp) => {
                 let status = resp.status().as_u16();
 
-                if status == 200 {
-                    match resp.json::<GetMyProcessesResponseBody>().await {
-                        Ok(body) => Ok(GetMyProcessesResponse { status, body }),
+                if status == 201 {
+                    match resp.json::<PostDocumentsResponseBody>().await {
+                        Ok(body) => Ok(PostDocumentsResponse { status, body }),
                         Err(err) => {
                             let body = ErrorResponseBody {
                                 error: true,
