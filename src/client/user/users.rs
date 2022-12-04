@@ -1,8 +1,8 @@
 use crate::authorization::HEADER_KEY;
+use crate::record::user::ReadOnlyUserRecord;
 use crate::request::user::users::PostUsersRequest;
 use crate::response::error::{ErrorResponse, ErrorResponseBody};
 use crate::response::user::users::{GetUsersResponse, GetUsersResponseBody, PostUsersResponse};
-use crate::response::user::UserRecord;
 use crate::Query;
 
 const RESOURCE: &str = "users";
@@ -84,7 +84,7 @@ impl Users {
         let http_client = reqwest::Client::new();
         let result = http_client
             .post(request_url)
-            .json(&request)
+            .json(&request.user)
             .header(HEADER_KEY, &self.authorization_header)
             .send()
             .await;
@@ -94,7 +94,7 @@ impl Users {
                 let status = resp.status().as_u16();
 
                 if status == 201 {
-                    match resp.json::<UserRecord>().await {
+                    match resp.json::<ReadOnlyUserRecord>().await {
                         Ok(body) => Ok(PostUsersResponse { status, body }),
                         Err(err) => {
                             let body = ErrorResponseBody {

@@ -1,4 +1,4 @@
-use crate::response::user::UserRecord;
+use crate::record::user::ReadOnlyUserRecord;
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Deserialize, Clone, Serialize)]
@@ -13,11 +13,11 @@ pub struct GetUsersResponseBody {
     pub limit: i32,
     pub total_count: i32,
     pub error: bool,
-    pub records: Vec<UserRecord>,
+    pub records: Vec<ReadOnlyUserRecord>,
 }
 
 #[derive(Debug, Deserialize, Clone, Serialize)]
 pub struct PostUsersResponse {
     pub status: u16,
-    pub body: UserRecord,
+    pub body: ReadOnlyUserRecord,
 }

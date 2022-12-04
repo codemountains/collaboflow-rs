@@ -94,6 +94,7 @@
 pub mod authorization;
 pub mod client;
 pub mod query;
+pub mod record;
 pub mod request;
 pub mod response;
 

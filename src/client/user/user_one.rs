@@ -1,8 +1,10 @@
 use crate::authorization::HEADER_KEY;
+use crate::record::user::ReadOnlyUserRecord;
+use crate::request::user::user_one::PutUserRequest;
 use crate::response::error::{ErrorResponse, ErrorResponseBody};
 use crate::response::user::user_one::GetUserResponse;
-use crate::response::user::UserRecord;
 use crate::Query;
+use serde::Serialize;
 
 const RESOURCE: &str = "users";
 
@@ -35,7 +37,68 @@ impl User {
                 let status = resp.status().as_u16();
 
                 if status == 200 {
-                    match resp.json::<UserRecord>().await {
+                    match resp.json::<ReadOnlyUserRecord>().await {
+                        Ok(body) => Ok(GetUserResponse { status, body }),
+                        Err(err) => {
+                            let body = ErrorResponseBody {
+                                error: true,
+                                messages: vec![err.to_string()],
+                            };
+                            let error_response = ErrorResponse { status, body };
+                            Err(error_response)
+                        }
+                    }
+                } else {
+                    match resp.json::<ErrorResponseBody>().await {
+                        Ok(body) => {
+                            let error_response = ErrorResponse { status, body };
+                            Err(error_response)
+                        }
+                        Err(err) => {
+                            let body = ErrorResponseBody {
+                                error: true,
+                                messages: vec![err.to_string()],
+                            };
+                            let error_response = ErrorResponse { status, body };
+                            Err(error_response)
+                        }
+                    }
+                }
+            }
+            Err(err) => {
+                let body = ErrorResponseBody {
+                    error: true,
+                    messages: vec![err.to_string()],
+                };
+                let error_response = ErrorResponse { status: 500, body };
+                Err(error_response)
+            }
+        }
+    }
+
+    pub async fn put<T: Serialize>(
+        &self,
+        user_id: &str,
+        query: Query,
+        request: PutUserRequest<T>,
+    ) -> Result<GetUserResponse, ErrorResponse> {
+        let request_url = format!("{}/{}", &self.url, user_id);
+
+        let http_client = reqwest::Client::new();
+        let result = http_client
+            .put(request_url)
+            .query(&query.to_queries())
+            .json(&request.user)
+            .header(HEADER_KEY, &self.authorization_header)
+            .send()
+            .await;
+
+        match result {
+            Ok(resp) => {
+                let status = resp.status().as_u16();
+
+                if status == 200 {
+                    match resp.json::<ReadOnlyUserRecord>().await {
                         Ok(body) => Ok(GetUserResponse { status, body }),
                         Err(err) => {
                             let body = ErrorResponseBody {
