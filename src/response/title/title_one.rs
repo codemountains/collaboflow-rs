@@ -6,3 +6,9 @@ pub struct GetTitleResponse {
     pub status: u16,
     pub body: TitleRecord,
 }
+
+#[derive(Debug, Deserialize, Clone, Serialize)]
+pub struct PutTitleResponse {
+    pub status: u16,
+    pub body: TitleRecord,
+}
