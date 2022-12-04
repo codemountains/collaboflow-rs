@@ -28,13 +28,14 @@ impl FormParts {
         query: Query,
     ) -> Result<GetFormPartsResponse, ErrorResponse> {
         let request_url = format!(
-            "{}/{}/{}/{}/{}?{}",
-            &self.url, form_id, NESTED_RESOURCE, form_version, LAST_RESOURCE, query,
+            "{}/{}/{}/{}/{}",
+            &self.url, form_id, NESTED_RESOURCE, form_version, LAST_RESOURCE,
         );
 
         let http_client = reqwest::Client::new();
         let result = http_client
             .get(request_url)
+            .query(&query.to_queries())
             .header(HEADER_KEY, &self.authorization_header)
             .send()
             .await;
