@@ -68,13 +68,11 @@ async fn document_put_works() {
         Ok(resp) => {
             let document_id = resp.body.document_id;
             let query = Query::builder().app_cd(app_cd);
-            let request = PutDocumentStatusRequest::<NewDocument>::new(
-                "request", None, None, None, None, None,
-            );
+            let request = PutDocumentStatusRequest::new(json!({"action": "request"}));
             let resp = client.document.put(document_id, query, request).await;
             assert_eq!(true, resp.is_ok());
         }
-        Err(err) => assert_ne!(200, err.status),
+        Err(err) => panic!("{}", err),
     }
 }
 

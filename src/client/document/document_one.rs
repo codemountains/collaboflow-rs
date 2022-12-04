@@ -93,7 +93,7 @@ impl Document {
         let result = http_client
             .put(request_url)
             .query(&query.to_queries())
-            .json(&request)
+            .json(&request.document)
             .header(HEADER_KEY, &self.authorization_header)
             .send()
             .await;

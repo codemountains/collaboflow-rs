@@ -122,8 +122,3 @@ pub fn user_group_code() -> String {
     dotenv().ok();
     env::var(USER_GROUP_CODE).expect(format!("{} is undefined.", USER_GROUP_CODE).as_str())
 }
-
-pub fn put_user_id() -> String {
-    dotenv().ok();
-    env::var(PUT_USER_ID).expect(format!("{} is undefined.", PUT_USER_ID).as_str())
-}
