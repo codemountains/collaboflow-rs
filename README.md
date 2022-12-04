@@ -88,6 +88,7 @@ async fn main() -> Result<(), ()> {
   - Query `fields` is not supported.
 - [postUser](http://docs.collaboflow.com/api-docs/#/User/postUser)
 - [getUser](http://docs.collaboflow.com/api-docs/#/User/getUser)
+- [putUser](http://docs.collaboflow.com/api-docs/#/User/putUser)
 
 ### Group
 
