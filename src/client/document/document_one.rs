@@ -28,11 +28,12 @@ impl Document {
         document_id: i32,
         query: Query,
     ) -> Result<GetDocumentResponse, ErrorResponse> {
-        let request_url = format!("{}/{}?{}", &self.url, document_id, query);
+        let request_url = format!("{}/{}", &self.url, document_id);
 
         let http_client = reqwest::Client::new();
         let result = http_client
             .get(request_url)
+            .query(&query.to_queries())
             .header(HEADER_KEY, &self.authorization_header)
             .send()
             .await;
