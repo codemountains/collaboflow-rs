@@ -1,13 +1,13 @@
-use crate::record::user::UserRecord;
+use crate::record::user::NewUserRecord;
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Deserialize, Clone, Serialize)]
 pub struct PostUsersRequest {
-    pub user: UserRecord,
+    pub user: NewUserRecord,
 }
 
 impl PostUsersRequest {
-    pub fn new(user: UserRecord) -> Self {
+    pub fn new(user: NewUserRecord) -> Self {
         Self { user }
     }
 }

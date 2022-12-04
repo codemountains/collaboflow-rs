@@ -1,7 +1,7 @@
 use crate::common::{
     client_with_api_key, client_with_password, put_user_id, user_group_code, user_unique_id,
 };
-use collaboflow_rs::record::user::UserRecord;
+use collaboflow_rs::record::user::NewUserRecord;
 use collaboflow_rs::request::user::user_one::PutUserRequest;
 use collaboflow_rs::request::user::users::PostUsersRequest;
 use collaboflow_rs::Query;
@@ -28,7 +28,7 @@ async fn users_works() {
 async fn users_post_works() {
     let test_user_id = Ulid::new().to_string();
     let user_group_code = user_group_code();
-    let user = UserRecord::new(
+    let user = NewUserRecord::new(
         &test_user_id,
         "test user",
         "",
@@ -99,7 +99,7 @@ async fn user_put_works() {
 async fn user_delete_works() {
     let test_user_id = Ulid::new().to_string();
     let user_group_code = user_group_code();
-    let user = UserRecord::new(
+    let user = NewUserRecord::new(
         &test_user_id,
         "delete test user",
         "",

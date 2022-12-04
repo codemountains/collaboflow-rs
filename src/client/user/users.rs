@@ -1,5 +1,5 @@
 use crate::authorization::HEADER_KEY;
-use crate::record::user::ReadOnlyUserRecord;
+use crate::record::user::UserRecord;
 use crate::request::user::users::PostUsersRequest;
 use crate::response::error::{ErrorResponse, ErrorResponseBody};
 use crate::response::user::users::{GetUsersResponse, GetUsersResponseBody, PostUsersResponse};
@@ -94,7 +94,7 @@ impl Users {
                 let status = resp.status().as_u16();
 
                 if status == 201 {
-                    match resp.json::<ReadOnlyUserRecord>().await {
+                    match resp.json::<UserRecord>().await {
                         Ok(body) => Ok(PostUsersResponse { status, body }),
                         Err(err) => {
                             let body = ErrorResponseBody {
