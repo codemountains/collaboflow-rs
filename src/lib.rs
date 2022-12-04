@@ -57,8 +57,13 @@
 //! ### Document
 //!
 //! - [getDocumentOverview](http://docs.collaboflow.com/api-docs/#/Document/getDocumentOverview)
+//! - [requestDocument](http://docs.collaboflow.com/api-docs/#/Document/requestDocument)
+//! - [putDocumentStatus](http://docs.collaboflow.com/api-docs/#/Document/putDocumentStatus)
+//! - [deleteDocument](http://docs.collaboflow.com/api-docs/#/Document/deleteDocument)
 //! - [getDeterms](http://docs.collaboflow.com/api-docs/#/Document/getDeterms)
 //! - [getDocumentContents](http://docs.collaboflow.com/api-docs/#/Document/getDocumentContents)
+//! - [simulateDeterms](http://docs.collaboflow.com/api-docs/#/Document/simulateDeterms)
+//! - [searchDocument](http://docs.collaboflow.com/api-docs/#/Document/searchDocument)
 //!
 //! ### MyStatus
 //!
@@ -77,19 +82,28 @@
 //!
 //! - [getUsers](http://docs.collaboflow.com/api-docs/#/User/getUsers)
 //!   - Query `fields` is not supported.
+//! - [postUser](http://docs.collaboflow.com/api-docs/#/User/postUser)
 //! - [getUser](http://docs.collaboflow.com/api-docs/#/User/getUser)
+//! - [putUser](http://docs.collaboflow.com/api-docs/#/User/putUser)
+//! - [deleteUser](http://docs.collaboflow.com/api-docs/#/User/deleteUser)
 //!
 //! ### Group
 //!
 //! - [getGroups](http://docs.collaboflow.com/api-docs/#/Group/getGroups)
 //!   - Query `fields` is not supported.
+//! - [postGroup](http://docs.collaboflow.com/api-docs/#/Group/postGroup)
 //! - [getGroup](http://docs.collaboflow.com/api-docs/#/Group/getGroup)
+//! - [putGroup](http://docs.collaboflow.com/api-docs/#/Group/putGroup)
+//! - [deleteGroup](http://docs.collaboflow.com/api-docs/#/Group/deleteGroup)
 //!
 //! ### Title
 //!
 //! - [getTitles](http://docs.collaboflow.com/api-docs/#/Title/getTitles)
 //!   - Query `fields` is not supported.
+//! - [postTitle](http://docs.collaboflow.com/api-docs/#/Title/postTitle)
 //! - [getTitle](http://docs.collaboflow.com/api-docs/#/Title/getTitle)
+//! - [putTitle](http://docs.collaboflow.com/api-docs/#/Title/putTitle)
+//! - [deleteTitle](http://docs.collaboflow.com/api-docs/#/Title/deleteTitle)
 
 pub mod authorization;
 pub mod client;
