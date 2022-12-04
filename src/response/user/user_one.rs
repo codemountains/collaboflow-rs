@@ -9,6 +9,12 @@ pub struct GetUserResponse {
 }
 
 #[derive(Debug, Deserialize, Clone, Serialize)]
+pub struct PutUserResponse {
+    pub status: u16,
+    pub body: UserRecord,
+}
+
+#[derive(Debug, Deserialize, Clone, Serialize)]
 pub struct DeleteUserResponse {
     pub status: u16,
     pub body: Value,

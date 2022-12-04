@@ -2,7 +2,7 @@ use crate::authorization::HEADER_KEY;
 use crate::record::user::UserRecord;
 use crate::request::user::user_one::PutUserRequest;
 use crate::response::error::{ErrorResponse, ErrorResponseBody};
-use crate::response::user::user_one::{DeleteUserResponse, GetUserResponse};
+use crate::response::user::user_one::{DeleteUserResponse, GetUserResponse, PutUserResponse};
 use crate::Query;
 use serde::Serialize;
 use serde_json::Value;
@@ -83,7 +83,7 @@ impl User {
         user_id: &str,
         query: Query,
         request: PutUserRequest<T>,
-    ) -> Result<GetUserResponse, ErrorResponse> {
+    ) -> Result<PutUserResponse, ErrorResponse> {
         let request_url = format!("{}/{}", &self.url, user_id);
 
         let http_client = reqwest::Client::new();
@@ -101,7 +101,7 @@ impl User {
 
                 if status == 200 {
                     match resp.json::<UserRecord>().await {
-                        Ok(body) => Ok(GetUserResponse { status, body }),
+                        Ok(body) => Ok(PutUserResponse { status, body }),
                         Err(err) => {
                             let body = ErrorResponseBody {
                                 error: true,
