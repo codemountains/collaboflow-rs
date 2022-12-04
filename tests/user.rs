@@ -95,6 +95,49 @@ async fn user_put_works() {
     assert_eq!(true, resp.is_ok());
 }
 
+#[tokio::test]
+async fn user_delete_works() {
+    let test_user_id = Ulid::new().to_string();
+    let user_group_code = user_group_code();
+    let user = UserRecord::new(
+        &test_user_id,
+        "delete test user",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        false,
+        false,
+        0,
+        false,
+        vec![user_group_code],
+        vec![],
+        "",
+        "",
+        "",
+        "",
+        "",
+        "password",
+    );
+    let request = PostUsersRequest::new(user);
+
+    let client = client_with_api_key();
+    match client.users.post(request).await {
+        Ok(resp) => {
+            let user_id = resp.body.userid;
+
+            let query = Query::builder().key("userid");
+            let client = client_with_api_key();
+            let resp = client.user.delete(&user_id, query).await;
+            assert_eq!(true, resp.is_ok());
+        }
+        Err(err) => assert_ne!(200, err.status),
+    }
+}
+
 #[derive(Serialize)]
 struct UpdateUser {
     extra1: String,
