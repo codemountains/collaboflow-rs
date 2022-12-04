@@ -55,7 +55,6 @@ async fn users_post_works() {
 
     let client = client_with_api_key();
     let resp = client.users.post(request).await;
-    println!("{:?}", resp);
     assert_eq!(true, resp.is_ok());
 }
 
