@@ -21,14 +21,14 @@ To use the driver in your application, simply add it to your project's `Cargo.to
 
 ```toml
 [dependencies]
-collaboflow-rs = "0.0.8"
+collaboflow-rs = "0.0.9"
 ```
 
 ## Example Usage
 
 ```toml
 [dependencies]
-collaboflow-rs = "0.0.8"
+collaboflow-rs = "0.0.9"
 tokio = "1.22.0"
 ```
 
@@ -68,6 +68,8 @@ async fn main() -> Result<(), ()> {
 - [deleteDocument](http://docs.collaboflow.com/api-docs/#/Document/deleteDocument)
 - [getDeterms](http://docs.collaboflow.com/api-docs/#/Document/getDeterms)
 - [getDocumentContents](http://docs.collaboflow.com/api-docs/#/Document/getDocumentContents)
+- [simulateDeterms](http://docs.collaboflow.com/api-docs/#/Document/simulateDeterms)
+- [searchDocument](http://docs.collaboflow.com/api-docs/#/Document/searchDocument)
 
 ### MyStatus
 

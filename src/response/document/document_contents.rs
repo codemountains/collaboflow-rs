@@ -1,4 +1,6 @@
-use crate::response::{RepresentUser, RequestGroup, RequestTitle, RequestUser};
+use crate::record::group::RequestGroup;
+use crate::record::title::RequestTitle;
+use crate::record::user::{RepresentUser, RequestUser};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
