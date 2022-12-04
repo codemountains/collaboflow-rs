@@ -3,6 +3,7 @@ use crate::client::document::document_contents::DocumentContents;
 use crate::client::document::document_determs::DocumentDeterms;
 use crate::client::document::document_one::Document;
 use crate::client::document::documents::Documents;
+use crate::client::document::documents_search::DocumentsSearch;
 use crate::client::document::documents_simulation_determs::DocumentsSimulationDeterms;
 use crate::client::form::form_parts::FormParts;
 use crate::client::form::form_settings_prints::FormSettingsPrints;
@@ -42,6 +43,7 @@ pub struct CollaboflowClient {
     pub document_determs: DocumentDeterms,
     pub document_contents: DocumentContents,
     pub documents_simulation_determs: DocumentsSimulationDeterms,
+    pub documents_search: DocumentsSearch,
     pub mydeterms: MyDeterms,
     pub myrequests: MyRequests,
     pub mydrafts: MyDrafts,
@@ -68,6 +70,7 @@ impl CollaboflowClient {
         let document_contents = DocumentContents::new(base_url, authorization_header);
         let documents_simulation_determs =
             DocumentsSimulationDeterms::new(base_url, authorization_header);
+        let documents_search = DocumentsSearch::new(base_url, authorization_header);
 
         // MyStatus
         let mydeterms = MyDeterms::new(base_url, authorization_header);
@@ -98,6 +101,7 @@ impl CollaboflowClient {
             document_determs,
             document_contents,
             documents_simulation_determs,
+            documents_search,
             mydeterms,
             myrequests,
             mydrafts,
