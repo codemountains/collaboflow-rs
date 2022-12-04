@@ -3,6 +3,7 @@ mod common;
 use crate::common::{app_cd, client_with_api_key, client_with_password, document_id, processes_id};
 use collaboflow_rs::request::document::document_one::PutDocumentStatusRequest;
 use collaboflow_rs::request::document::documents::PostDocumentsRequest;
+use collaboflow_rs::request::document::documents_search::PostDocumentsSearchRequest;
 use collaboflow_rs::request::document::documents_simulation_determs::PostDocumentsSimulationDetermsRequest;
 use collaboflow_rs::Query;
 use serde::Serialize;
@@ -147,6 +148,18 @@ async fn documents_simulation_determs_works() {
     );
     let client = client_with_api_key();
     let resp = client.documents_simulation_determs.post(request).await;
+    assert_eq!(true, resp.is_ok());
+}
+
+#[tokio::test]
+async fn documents_search() {
+    let app_cd = app_cd();
+
+    let request = PostDocumentsSearchRequest::new(
+        json!({"app_cd": app_cd, "query": "title LIKE 'collaboflow-rs'"}),
+    );
+    let client = client_with_api_key();
+    let resp = client.documents_search.post(request).await;
     assert_eq!(true, resp.is_ok());
 }
 
