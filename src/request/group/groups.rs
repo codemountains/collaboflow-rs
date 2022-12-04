@@ -1,5 +1,5 @@
-use serde::{Deserialize, Serialize};
 use crate::record::group::NewGroupRecord;
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct PostGroupsRequest {

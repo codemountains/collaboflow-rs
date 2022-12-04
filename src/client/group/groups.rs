@@ -1,9 +1,11 @@
 use crate::authorization::HEADER_KEY;
-use crate::response::error::{ErrorResponse, ErrorResponseBody};
-use crate::response::group::groups::{GetGroupsResponse, GetGroupsResponseBody, PostGroupsResponse};
-use crate::Query;
 use crate::record::group::GroupRecord;
 use crate::request::group::groups::PostGroupsRequest;
+use crate::response::error::{ErrorResponse, ErrorResponseBody};
+use crate::response::group::groups::{
+    GetGroupsResponse, GetGroupsResponseBody, PostGroupsResponse,
+};
+use crate::Query;
 
 const RESOURCE: &str = "groups";
 
