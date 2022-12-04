@@ -1,4 +1,5 @@
-use crate::response::{ProcessCategory, ProcessFrom};
+use crate::record::category::ProcessCategory;
+use crate::response::ProcessFrom;
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Deserialize, Clone, Serialize)]

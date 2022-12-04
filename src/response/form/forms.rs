@@ -1,4 +1,4 @@
-use crate::response::FormCategory;
+use crate::record::category::FormCategory;
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Deserialize, Clone, Serialize)]

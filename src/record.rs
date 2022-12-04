@@ -1,3 +1,4 @@
+pub mod category;
 pub mod document;
 pub mod group;
 pub mod title;
