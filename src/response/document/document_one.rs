@@ -1,4 +1,4 @@
-use crate::response::RequestTitle;
+use crate::record::title::RequestTitle;
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Deserialize, Clone, Serialize)]

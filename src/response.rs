@@ -9,13 +9,6 @@ pub mod title;
 pub mod user;
 
 #[derive(Debug, Deserialize, Clone, Serialize)]
-pub struct RequestTitle {
-    pub id: String,
-    pub code: String,
-    pub name: String,
-}
-
-#[derive(Debug, Deserialize, Clone, Serialize)]
 pub struct RequestGroup {
     pub id: String,
     pub code: String,
