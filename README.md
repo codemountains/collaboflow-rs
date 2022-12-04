@@ -69,6 +69,7 @@ async fn main() -> Result<(), ()> {
 - [getDeterms](http://docs.collaboflow.com/api-docs/#/Document/getDeterms)
 - [getDocumentContents](http://docs.collaboflow.com/api-docs/#/Document/getDocumentContents)
 - [simulateDeterms](http://docs.collaboflow.com/api-docs/#/Document/simulateDeterms)
+- [searchDocument](http://docs.collaboflow.com/api-docs/#/Document/searchDocument)
 
 ### MyStatus
 
