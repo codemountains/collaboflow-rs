@@ -3,6 +3,7 @@ mod common;
 use crate::common::{app_cd, client_with_api_key, client_with_password, document_id, processes_id};
 use collaboflow_rs::request::document::document_one::PutDocumentStatusRequest;
 use collaboflow_rs::request::document::documents::PostDocumentsRequest;
+use collaboflow_rs::request::document::documents_simulation_determs::PostDocumentsSimulationDetermsRequest;
 use collaboflow_rs::Query;
 use serde::Serialize;
 use serde_json::json;
@@ -133,6 +134,19 @@ async fn document_determs_works() {
     let query = Query::builder().app_cd(app_cd);
     let client = client_with_password();
     let resp = client.document_determs.get(document_id, query).await;
+    assert_eq!(true, resp.is_ok());
+}
+
+#[tokio::test]
+async fn documents_simulation_determs_works() {
+    let app_cd = app_cd();
+    let processes_id = processes_id();
+
+    let request = PostDocumentsSimulationDetermsRequest::new(
+        json!({"app_cd": app_cd, "processes_id": processes_id}),
+    );
+    let client = client_with_api_key();
+    let resp = client.documents_simulation_determs.post(request).await;
     assert_eq!(true, resp.is_ok());
 }
 
