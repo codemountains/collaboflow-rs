@@ -15,3 +15,9 @@ pub struct GetGroupsResponseBody {
     pub error: bool,
     pub records: Vec<GroupRecord>,
 }
+
+#[derive(Debug, Deserialize, Clone, Serialize)]
+pub struct PostGroupsResponse {
+    pub status: u16,
+    pub body: GroupRecord,
+}
