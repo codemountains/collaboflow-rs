@@ -27,14 +27,12 @@ impl DocumentDeterms {
         document_id: i32,
         query: Query,
     ) -> Result<GetDocumentDetermsResponse, ErrorResponse> {
-        let request_url = format!(
-            "{}/{}/{}?{}",
-            &self.url, document_id, NESTED_RESOURCE, query,
-        );
+        let request_url = format!("{}/{}/{}", &self.url, document_id, NESTED_RESOURCE);
 
         let http_client = reqwest::Client::new();
         let result = http_client
             .get(request_url)
+            .query(&query.to_queries())
             .header(HEADER_KEY, &self.authorization_header)
             .send()
             .await;
