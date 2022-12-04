@@ -68,6 +68,7 @@ async fn main() -> Result<(), ()> {
 - [deleteDocument](http://docs.collaboflow.com/api-docs/#/Document/deleteDocument)
 - [getDeterms](http://docs.collaboflow.com/api-docs/#/Document/getDeterms)
 - [getDocumentContents](http://docs.collaboflow.com/api-docs/#/Document/getDocumentContents)
+- [simulateDeterms](http://docs.collaboflow.com/api-docs/#/Document/simulateDeterms)
 
 ### MyStatus
 
