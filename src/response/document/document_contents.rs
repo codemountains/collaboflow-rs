@@ -1,8 +1,8 @@
+use crate::record::group::RequestGroup;
 use crate::record::title::RequestTitle;
-use crate::response::{RepresentUser, RequestUser};
+use crate::record::user::{RepresentUser, RequestUser};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
-use crate::record::group::RequestGroup;
 
 #[derive(Debug, Deserialize, Clone, Serialize)]
 pub struct GetDocumentContentsResponse {

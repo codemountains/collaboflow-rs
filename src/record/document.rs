@@ -1,6 +1,6 @@
-use crate::response::{RepresentUser, RequestUser};
-use serde::{Deserialize, Serialize};
 use crate::record::group::RequestGroup;
+use crate::record::user::{RepresentUser, RequestUser};
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Deserialize, Clone, Serialize)]
 pub struct SimulationDetermRecord {

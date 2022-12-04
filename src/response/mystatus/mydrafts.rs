@@ -1,4 +1,4 @@
-use crate::response::{CreateUser, EmptyRepresentUser, RepresentUser};
+use crate::record::user::{CreateUser, EmptyRepresentUser, RepresentUser};
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Deserialize, Clone, Serialize)]
