@@ -89,6 +89,7 @@ async fn main() -> Result<(), ()> {
 - [postUser](http://docs.collaboflow.com/api-docs/#/User/postUser)
 - [getUser](http://docs.collaboflow.com/api-docs/#/User/getUser)
 - [putUser](http://docs.collaboflow.com/api-docs/#/User/putUser)
+- [deleteUser](http://docs.collaboflow.com/api-docs/#/User/deleteUser)
 
 ### Group
 
