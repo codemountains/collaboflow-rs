@@ -1,11 +1,10 @@
 use crate::authorization::HEADER_KEY;
+use crate::client::user::RESOURCE_V1_USERS;
 use crate::record::user::UserRecord;
 use crate::request::user::users::PostUsersRequest;
 use crate::response::error::{ErrorResponse, ErrorResponseBody};
 use crate::response::user::users::{GetUsersResponse, GetUsersResponseBody, PostUsersResponse};
 use crate::Query;
-
-const RESOURCE: &str = "users";
 
 #[derive(Debug, Clone)]
 pub struct Users {
@@ -16,7 +15,7 @@ pub struct Users {
 impl Users {
     pub fn new(url: &str, authorization_header: &str) -> Self {
         Self {
-            url: url.to_string() + RESOURCE,
+            url: url.to_string() + RESOURCE_V1_USERS,
             authorization_header: authorization_header.to_string(),
         }
     }
