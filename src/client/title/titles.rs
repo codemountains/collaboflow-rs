@@ -1,4 +1,5 @@
 use crate::authorization::HEADER_KEY;
+use crate::client::title::RESOURCE_V1_TITLES;
 use crate::record::title::TitleRecord;
 use crate::request::title::titles::PostTitlesRequest;
 use crate::response::error::{ErrorResponse, ErrorResponseBody};
@@ -6,8 +7,6 @@ use crate::response::title::titles::{
     GetTitlesResponse, GetTitlesResponseBody, PostTitlesResponse,
 };
 use crate::Query;
-
-const RESOURCE: &str = "titles";
 
 #[derive(Debug, Clone)]
 pub struct Titles {
@@ -18,7 +17,7 @@ pub struct Titles {
 impl Titles {
     pub fn new(url: &str, authorization_header: &str) -> Self {
         Self {
-            url: url.to_string() + RESOURCE,
+            url: url.to_string() + RESOURCE_V1_TITLES,
             authorization_header: authorization_header.to_string(),
         }
     }
