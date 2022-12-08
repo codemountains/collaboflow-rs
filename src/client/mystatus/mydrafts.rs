@@ -3,7 +3,7 @@ use crate::response::error::{ErrorResponse, ErrorResponseBody};
 use crate::response::mystatus::mydrafts::{GetMyDraftsResponse, GetMyDraftsResponseBody};
 use crate::Query;
 
-const RESOURCE: &str = "mydrafts";
+const RESOURCE: &str = "/v1/mydrafts";
 
 #[derive(Debug, Clone)]
 pub struct MyDrafts {
