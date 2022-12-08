@@ -1,4 +1,5 @@
 use crate::authorization::HEADER_KEY;
+use crate::client::user::RESOURCE_V1_USERS;
 use crate::record::user::UserRecord;
 use crate::request::user::user_one::PutUserRequest;
 use crate::response::error::{ErrorResponse, ErrorResponseBody};
@@ -6,8 +7,6 @@ use crate::response::user::user_one::{DeleteUserResponse, GetUserResponse, PutUs
 use crate::Query;
 use serde::Serialize;
 use serde_json::Value;
-
-const RESOURCE: &str = "users";
 
 #[derive(Debug, Clone)]
 pub struct User {
@@ -18,7 +17,7 @@ pub struct User {
 impl User {
     pub fn new(url: &str, authorization_header: &str) -> Self {
         Self {
-            url: url.to_string() + RESOURCE,
+            url: url.to_string() + RESOURCE_V1_USERS,
             authorization_header: authorization_header.to_string(),
         }
     }
