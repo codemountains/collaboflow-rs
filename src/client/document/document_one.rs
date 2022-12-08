@@ -1,4 +1,5 @@
 use crate::authorization::HEADER_KEY;
+use crate::client::document::RESOURCE_V1_DOCUMENTS;
 use crate::request::document::document_one::PutDocumentStatusRequest;
 use crate::response::document::document_one::{
     DeleteDocumentResponse, GetDocumentResponse, GetDocumentResponseBody, PutDocumentStatusResponse,
@@ -6,8 +7,6 @@ use crate::response::document::document_one::{
 use crate::response::error::{ErrorResponse, ErrorResponseBody};
 use crate::Query;
 use serde::Serialize;
-
-const RESOURCE: &str = "documents";
 
 #[derive(Debug, Clone)]
 pub struct Document {
@@ -18,7 +17,7 @@ pub struct Document {
 impl Document {
     pub fn new(url: &str, authorization_header: &str) -> Self {
         Self {
-            url: url.to_string() + RESOURCE,
+            url: url.to_string() + RESOURCE_V1_DOCUMENTS,
             authorization_header: authorization_header.to_string(),
         }
     }
