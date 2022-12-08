@@ -1,9 +1,8 @@
 use crate::authorization::HEADER_KEY;
+use crate::client::form::RESOURCE_V1_FORMS;
 use crate::response::error::{ErrorResponse, ErrorResponseBody};
 use crate::response::form::forms::{GetFormsResponse, GetFormsResponseBody};
 use crate::Query;
-
-const RESOURCE: &str = "forms";
 
 #[derive(Debug, Clone)]
 pub struct Forms {
@@ -14,7 +13,7 @@ pub struct Forms {
 impl Forms {
     pub fn new(url: &str, authorization_header: &str) -> Self {
         Self {
-            url: url.to_string() + RESOURCE,
+            url: url.to_string() + RESOURCE_V1_FORMS,
             authorization_header: authorization_header.to_string(),
         }
     }

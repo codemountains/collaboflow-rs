@@ -1,4 +1,5 @@
 use crate::authorization::HEADER_KEY;
+use crate::client::document::RESOURCE_V1_DOCUMENTS;
 use crate::request::document::documents_search::PostDocumentsSearchRequest;
 use crate::response::document::documents_search::{
     PostDocumentsSearchResponse, PostDocumentsSearchResponseBody,
@@ -6,7 +7,7 @@ use crate::response::document::documents_search::{
 use crate::response::error::{ErrorResponse, ErrorResponseBody};
 use serde::Serialize;
 
-const RESOURCE: &str = "documents/search";
+const ACTION: &str = "/search";
 
 #[derive(Debug, Clone)]
 pub struct DocumentsSearch {
@@ -17,7 +18,7 @@ pub struct DocumentsSearch {
 impl DocumentsSearch {
     pub fn new(url: &str, authorization_header: &str) -> Self {
         Self {
-            url: url.to_string() + RESOURCE,
+            url: url.to_string() + RESOURCE_V1_DOCUMENTS + ACTION,
             authorization_header: authorization_header.to_string(),
         }
     }

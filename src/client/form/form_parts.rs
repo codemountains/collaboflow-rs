@@ -1,9 +1,9 @@
 use crate::authorization::HEADER_KEY;
+use crate::client::form::RESOURCE_V1_FORMS;
 use crate::response::error::{ErrorResponse, ErrorResponseBody};
 use crate::response::form::form_parts::{GetFormPartsResponse, GetFormPartsResponseBody};
 use crate::Query;
 
-const RESOURCE: &str = "forms";
 const NESTED_RESOURCE: &str = "versions";
 const LAST_RESOURCE: &str = "parts";
 
@@ -16,7 +16,7 @@ pub struct FormParts {
 impl FormParts {
     pub fn new(url: &str, authorization_header: &str) -> Self {
         Self {
-            url: url.to_string() + RESOURCE,
+            url: url.to_string() + RESOURCE_V1_FORMS,
             authorization_header: authorization_header.to_string(),
         }
     }

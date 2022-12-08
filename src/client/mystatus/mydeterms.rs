@@ -3,7 +3,7 @@ use crate::response::error::{ErrorResponse, ErrorResponseBody};
 use crate::response::mystatus::mydeterms::{GetMyDetermsResponse, GetMyDetermsResponseBody};
 use crate::Query;
 
-const RESOURCE: &str = "mydeterms";
+const RESOURCE: &str = "/v1/mydeterms";
 
 #[derive(Debug, Clone)]
 pub struct MyDeterms {

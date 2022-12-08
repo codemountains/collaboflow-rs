@@ -1,11 +1,11 @@
 use crate::authorization::HEADER_KEY;
+use crate::client::document::RESOURCE_V1_DOCUMENTS;
 use crate::response::document::document_contents::{
     GetDocumentContentsResponse, GetDocumentContentsResponseBody,
 };
 use crate::response::error::{ErrorResponse, ErrorResponseBody};
 use crate::Query;
 
-const RESOURCE: &str = "documents";
 const NESTED_RESOURCE: &str = "contents";
 
 #[derive(Debug, Clone)]
@@ -17,7 +17,7 @@ pub struct DocumentContents {
 impl DocumentContents {
     pub fn new(url: &str, authorization_header: &str) -> Self {
         Self {
-            url: url.to_string() + RESOURCE,
+            url: url.to_string() + RESOURCE_V1_DOCUMENTS,
             authorization_header: authorization_header.to_string(),
         }
     }

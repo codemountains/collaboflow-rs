@@ -1,11 +1,11 @@
 use crate::authorization::HEADER_KEY;
+use crate::client::form::RESOURCE_V1_FORMS;
 use crate::response::error::{ErrorResponse, ErrorResponseBody};
 use crate::response::form::form_settings_prints::{
     GetFormSettingsPrintsResponse, GetFormSettingsPrintsResponseBody,
 };
 use crate::Query;
 
-const RESOURCE: &str = "forms";
 const NESTED_RESOURCE: &str = "versions";
 const LAST_RESOURCE: &str = "settings/prints";
 
@@ -18,7 +18,7 @@ pub struct FormSettingsPrints {
 impl FormSettingsPrints {
     pub fn new(url: &str, authorization_header: &str) -> Self {
         Self {
-            url: url.to_string() + RESOURCE,
+            url: url.to_string() + RESOURCE_V1_FORMS,
             authorization_header: authorization_header.to_string(),
         }
     }

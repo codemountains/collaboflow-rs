@@ -21,14 +21,14 @@ To use the driver in your application, simply add it to your project's `Cargo.to
 
 ```toml
 [dependencies]
-collaboflow-rs = "0.0.9"
+collaboflow-rs = "0.0.10"
 ```
 
 ## Example Usage
 
 ```toml
 [dependencies]
-collaboflow-rs = "0.0.9"
+collaboflow-rs = "0.0.10"
 tokio = "1.22.0"
 ```
 
@@ -39,7 +39,7 @@ use collaboflow_rs::{Authorization, CollaboflowClient, Query};
 async fn main() -> Result<(), ()> {
     let authorization = Authorization::with_api_key("User id", "API key");
 
-    let client = CollaboflowClient::new("https://{Collaboflow url}/{Instance name}/api/index.cfm/v1/", authorization);
+    let client = CollaboflowClient::new("https://{Collaboflow url}/{Instance name}/api/index.cfm", authorization);
 
     let query = Query::builder().app_cd(1); // Your app cd
 
