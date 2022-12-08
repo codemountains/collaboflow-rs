@@ -1,4 +1,5 @@
 use crate::authorization::HEADER_KEY;
+use crate::client::group::RESOURCE_V1_GROUPS;
 use crate::record::group::GroupRecord;
 use crate::request::group::groups::PostGroupsRequest;
 use crate::response::error::{ErrorResponse, ErrorResponseBody};
@@ -6,8 +7,6 @@ use crate::response::group::groups::{
     GetGroupsResponse, GetGroupsResponseBody, PostGroupsResponse,
 };
 use crate::Query;
-
-const RESOURCE: &str = "groups";
 
 #[derive(Debug, Clone)]
 pub struct Groups {
@@ -18,7 +17,7 @@ pub struct Groups {
 impl Groups {
     pub fn new(url: &str, authorization_header: &str) -> Self {
         Self {
-            url: url.to_string() + RESOURCE,
+            url: url.to_string() + RESOURCE_V1_GROUPS,
             authorization_header: authorization_header.to_string(),
         }
     }
