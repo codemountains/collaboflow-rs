@@ -15,14 +15,14 @@
 //!
 //! ```toml
 //! [dependencies]
-//! collaboflow-rs = "0.0.9"
+//! collaboflow-rs = "0.0.10"
 //! ```
 //!
 //! ## Example Usage
 //!
 //! ```toml
 //! [dependencies]
-//! collaboflow-rs = "0.0.9"
+//! collaboflow-rs = "0.0.10"
 //! tokio = "1.23.0"
 //! ```
 //!
