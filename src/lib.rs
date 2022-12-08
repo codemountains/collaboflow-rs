@@ -33,7 +33,7 @@
 //! async fn main() -> Result<(), ()> {
 //!     let authorization = Authorization::with_api_key("User id", "API key");
 //!
-//!     let client = CollaboflowClient::new("https://{Collaboflow url}/{Instance name}/api/index.cfm/v1/", authorization);
+//!     let client = CollaboflowClient::new("https://{Collaboflow url}/{Instance name}/api/index.cfm", authorization);
 //!
 //!     let query = Query::builder().app_cd(1); // Your app cd
 //!
