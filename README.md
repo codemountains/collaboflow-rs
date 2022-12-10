@@ -21,14 +21,14 @@ To use the driver in your application, simply add it to your project's `Cargo.to
 
 ```toml
 [dependencies]
-collaboflow-rs = "0.0.10"
+collaboflow-rs = "0.0.11"
 ```
 
 ## Example Usage
 
 ```toml
 [dependencies]
-collaboflow-rs = "0.0.10"
+collaboflow-rs = "0.0.11"
 tokio = "1.22.0"
 ```
 
