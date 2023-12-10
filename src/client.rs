@@ -5,6 +5,7 @@ use crate::client::document::document_one::Document;
 use crate::client::document::documents::Documents;
 use crate::client::document::documents_search::DocumentsSearch;
 use crate::client::document::documents_simulation_determs::DocumentsSimulationDeterms;
+use crate::client::file::files::Files;
 use crate::client::form::form_parts::FormParts;
 use crate::client::form::form_settings_prints::FormSettingsPrints;
 use crate::client::form::forms::Forms;
@@ -20,6 +21,7 @@ use crate::client::user::user_one::User;
 use crate::client::user::users::Users;
 
 pub mod document;
+mod file;
 pub mod form;
 pub mod group;
 pub mod mystatus;
@@ -48,6 +50,7 @@ pub struct CollaboflowClient {
     pub myrequests: MyRequests,
     pub mydrafts: MyDrafts,
     pub myprocesses: MyProcesses,
+    pub files: Files,
     pub forms: Forms,
     pub form_parts: FormParts,
     pub form_settings_prints: FormSettingsPrints,
@@ -78,6 +81,9 @@ impl CollaboflowClient {
         let mydrafts = MyDrafts::new(base_url, authorization_header);
         let myprocesses = MyProcesses::new(base_url, authorization_header);
 
+        // File
+        let files = Files::new(base_url, authorization_header);
+
         // Form
         let forms = Forms::new(base_url, authorization_header);
         let form_parts = FormParts::new(base_url, authorization_header);
@@ -106,6 +112,7 @@ impl CollaboflowClient {
             myrequests,
             mydrafts,
             myprocesses,
+            files,
             forms,
             form_parts,
             form_settings_prints,
