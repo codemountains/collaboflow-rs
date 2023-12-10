@@ -1,4 +1,5 @@
 # Collaboflow REST API Client
+
 [![Crates.io](https://img.shields.io/crates/v/collaboflow-rs.svg)](https://crates.io/crates/collaboflow-rs)
 [![docs.rs](https://docs.rs/collaboflow-rs/badge.svg)](https://docs.rs/collaboflow-rs)
 [![License](https://img.shields.io/github/license/codemountains/collaboflow-rs)](LICENSE)
@@ -21,14 +22,14 @@ To use the driver in your application, simply add it to your project's `Cargo.to
 
 ```toml
 [dependencies]
-collaboflow-rs = "0.0.11"
+collaboflow-rs = "0.0.12"
 ```
 
 ## Example Usage
 
 ```toml
 [dependencies]
-collaboflow-rs = "0.0.11"
+collaboflow-rs = "0.0.12"
 tokio = "1.22.0"
 ```
 
@@ -77,6 +78,11 @@ async fn main() -> Result<(), ()> {
 - [getMyRequests](http://docs.collaboflow.com/api-docs/#/MyStatus/getMyRequests)
 - [getMyDrafts](http://docs.collaboflow.com/api-docs/#/MyStatus/getMyDrafts)
 - [getMyProcesses](http://docs.collaboflow.com/api-docs/#/MyStatus/getMyProcesses)
+
+### File
+
+- [uploadFile](http://docs.collaboflow.com/api-docs/#/File/uploadFile)
+- [downloadFile](http://docs.collaboflow.com/api-docs/#/File/downloadFile)
 
 ### Form
 
