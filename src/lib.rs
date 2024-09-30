@@ -15,15 +15,15 @@
 //!
 //! ```toml
 //! [dependencies]
-//! collaboflow-rs = "0.0.11"
+//! collaboflow-rs = "1.0.1"
 //! ```
 //!
 //! ## Example Usage
 //!
 //! ```toml
 //! [dependencies]
-//! collaboflow-rs = "0.0.11"
-//! tokio = "1.23.0"
+//! collaboflow-rs = "1.0.1"
+//! tokio = "1.40.0"
 //! ```
 //!
 //! ```rust,no_run
@@ -81,7 +81,6 @@
 //! ### User
 //!
 //! - [getUsers](http://docs.collaboflow.com/api-docs/#/User/getUsers)
-//!   - Query `fields` is not supported.
 //! - [postUser](http://docs.collaboflow.com/api-docs/#/User/postUser)
 //! - [getUser](http://docs.collaboflow.com/api-docs/#/User/getUser)
 //! - [putUser](http://docs.collaboflow.com/api-docs/#/User/putUser)
@@ -90,7 +89,6 @@
 //! ### Group
 //!
 //! - [getGroups](http://docs.collaboflow.com/api-docs/#/Group/getGroups)
-//!   - Query `fields` is not supported.
 //! - [postGroup](http://docs.collaboflow.com/api-docs/#/Group/postGroup)
 //! - [getGroup](http://docs.collaboflow.com/api-docs/#/Group/getGroup)
 //! - [putGroup](http://docs.collaboflow.com/api-docs/#/Group/putGroup)
@@ -99,7 +97,6 @@
 //! ### Title
 //!
 //! - [getTitles](http://docs.collaboflow.com/api-docs/#/Title/getTitles)
-//!   - Query `fields` is not supported.
 //! - [postTitle](http://docs.collaboflow.com/api-docs/#/Title/postTitle)
 //! - [getTitle](http://docs.collaboflow.com/api-docs/#/Title/getTitle)
 //! - [putTitle](http://docs.collaboflow.com/api-docs/#/Title/putTitle)
