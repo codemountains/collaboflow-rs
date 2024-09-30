@@ -3,10 +3,18 @@ use collaboflow_rs::record::user::NewUserRecord;
 use collaboflow_rs::request::user::user_one::PutUserRequest;
 use collaboflow_rs::request::user::users::PostUsersRequest;
 use collaboflow_rs::Query;
+use serde::Deserialize;
 use serde_json::json;
 use ulid::Ulid;
 
 mod common;
+
+#[derive(Deserialize, Debug)]
+#[allow(dead_code)]
+struct User {
+    name: String,
+    email: String,
+}
 
 #[tokio::test]
 async fn users_works() {
@@ -18,6 +26,15 @@ async fn users_works() {
     let query = Query::default();
     let client = client_with_password();
     let resp = client.users.get(query).await;
+    assert_eq!(true, resp.is_ok());
+}
+
+#[tokio::test]
+async fn users_with_fields_works() {
+    let fields = vec!["name".to_string(), "code".to_string()];
+    let query = Query::builder().fields(fields);
+    let client = client_with_api_key();
+    let resp = client.users.get_with_fields::<User>(query).await;
     assert_eq!(true, resp.is_ok());
 }
 
