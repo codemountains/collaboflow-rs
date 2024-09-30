@@ -4,9 +4,11 @@ use crate::record::group::GroupRecord;
 use crate::request::group::groups::PostGroupsRequest;
 use crate::response::error::{ErrorResponse, ErrorResponseBody};
 use crate::response::group::groups::{
-    GetGroupsResponse, GetGroupsResponseBody, PostGroupsResponse,
+    GetGroupsResponse, GetGroupsResponseBody, GetGroupsResponseBodyWithFields,
+    GetGroupsResponseWithFields, PostGroupsResponse,
 };
 use crate::Query;
+use serde::Deserialize;
 
 #[derive(Debug, Clone)]
 pub struct Groups {
@@ -66,6 +68,43 @@ impl Groups {
                     }
                 }
             }
+            Err(err) => {
+                let body = ErrorResponseBody {
+                    error: true,
+                    messages: vec![err.to_string()],
+                };
+                let error_response = ErrorResponse { status: 500, body };
+                Err(error_response)
+            }
+        }
+    }
+
+    pub async fn get_with_fields<T: for<'a> Deserialize<'a>>(
+        &self,
+        query: Query,
+    ) -> Result<GetGroupsResponseWithFields<T>, ErrorResponse> {
+        let resp = self.get(query).await?;
+        match serde_json::to_value(&resp.body.records) {
+            Ok(v) => match serde_json::from_value::<Vec<T>>(v) {
+                Ok(records) => Ok(GetGroupsResponseWithFields {
+                    status: resp.status,
+                    body: GetGroupsResponseBodyWithFields {
+                        offset: resp.body.offset,
+                        limit: resp.body.limit,
+                        total_count: resp.body.total_count,
+                        error: false,
+                        records,
+                    },
+                }),
+                Err(err) => {
+                    let body = ErrorResponseBody {
+                        error: true,
+                        messages: vec![err.to_string()],
+                    };
+                    let error_response = ErrorResponse { status: 500, body };
+                    Err(error_response)
+                }
+            },
             Err(err) => {
                 let body = ErrorResponseBody {
                     error: true,
