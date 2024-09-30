@@ -61,6 +61,9 @@ impl Query {
         if let Some(key) = &self.key {
             queries.push(("key".to_string(), key.to_string()));
         }
+        if let Some(fields) = self.fields.clone() {
+            queries.push(("fields".to_string(), fields.join(",")));
+        }
 
         queries
     }

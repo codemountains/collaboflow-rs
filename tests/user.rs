@@ -31,7 +31,7 @@ async fn users_works() {
 
 #[tokio::test]
 async fn users_with_fields_works() {
-    let fields = vec!["name".to_string(), "code".to_string()];
+    let fields = vec!["name".to_string(), "email".to_string()];
     let query = Query::builder().fields(fields);
     let client = client_with_api_key();
     let resp = client.users.get_with_fields::<User>(query).await;
