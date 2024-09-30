@@ -21,3 +21,18 @@ pub struct PostGroupsResponse {
     pub status: u16,
     pub body: GroupRecord,
 }
+
+#[derive(Debug, Deserialize, Clone, Serialize)]
+pub struct GetGroupsResponseWithFields<T> {
+    pub status: u16,
+    pub body: GetGroupsResponseBodyWithFields<T>,
+}
+
+#[derive(Debug, Deserialize, Clone, Serialize)]
+pub struct GetGroupsResponseBodyWithFields<T> {
+    pub offset: i32,
+    pub limit: i32,
+    pub total_count: i32,
+    pub error: bool,
+    pub records: Vec<T>,
+}

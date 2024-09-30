@@ -12,10 +12,6 @@ use std::fmt;
 ///     .offset(0)
 ///     .limit(10);
 /// ```
-///
-/// ## Notes
-///
-/// Query `fields` is not supported.
 #[derive(Debug, Clone, Default)]
 pub struct Query {
     pub app_cd: Option<i32>,
@@ -25,6 +21,7 @@ pub struct Query {
     pub category_id: Option<i32>,
     pub detail: Option<bool>,
     pub key: Option<String>,
+    pub fields: Option<Vec<String>>,
 }
 
 impl Query {
@@ -37,6 +34,7 @@ impl Query {
             category_id: None,
             detail: None,
             key: None,
+            fields: None,
         }
     }
 
@@ -62,6 +60,9 @@ impl Query {
         }
         if let Some(key) = &self.key {
             queries.push(("key".to_string(), key.to_string()));
+        }
+        if let Some(fields) = self.fields.clone() {
+            queries.push(("fields".to_string(), fields.join(",")));
         }
 
         queries
@@ -99,6 +100,11 @@ impl Query {
 
     pub fn key(mut self, key: &str) -> Self {
         self.key = Some(key.to_string());
+        self
+    }
+
+    pub fn fields(mut self, fields: Vec<String>) -> Self {
+        self.fields = Some(fields);
         self
     }
 }
@@ -150,6 +156,21 @@ impl fmt::Display for Query {
                 query_string += "&"
             }
             query_string += format!("key={}", key).as_str();
+        }
+
+        if let Some(fields) = &self.fields {
+            let mut fields_string = "".to_string();
+            for field in fields.iter() {
+                if !fields_string.is_empty() {
+                    fields_string += ","
+                }
+                fields_string += field.as_str();
+            }
+
+            if !query_string.is_empty() {
+                query_string += "&"
+            }
+            query_string += format!("fields={}", fields_string).as_str();
         }
 
         write!(f, "{}", query_string)

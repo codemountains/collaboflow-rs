@@ -23,15 +23,15 @@ To use the driver in your application, simply add it to your project's `Cargo.to
 
 ```toml
 [dependencies]
-collaboflow-rs = "0.0.13"
+collaboflow-rs = "1.0.0"
 ```
 
 ## Example Usage
 
 ```toml
 [dependencies]
-collaboflow-rs = "0.0.13"
-tokio = "1.22.0"
+collaboflow-rs = "1.0.0"
+tokio = "1.40.0"
 ```
 
 ```rust
@@ -94,7 +94,6 @@ async fn main() -> Result<(), ()> {
 ### User
 
 - [getUsers](http://docs.collaboflow.com/api-docs/#/User/getUsers)
-  - Query `fields` is not supported.
 - [postUser](http://docs.collaboflow.com/api-docs/#/User/postUser)
 - [getUser](http://docs.collaboflow.com/api-docs/#/User/getUser)
 - [putUser](http://docs.collaboflow.com/api-docs/#/User/putUser)
@@ -103,7 +102,6 @@ async fn main() -> Result<(), ()> {
 ### Group
 
 - [getGroups](http://docs.collaboflow.com/api-docs/#/Group/getGroups)
-  - Query `fields` is not supported.
 - [postGroup](http://docs.collaboflow.com/api-docs/#/Group/postGroup)
 - [getGroup](http://docs.collaboflow.com/api-docs/#/Group/getGroup)
 - [putGroup](http://docs.collaboflow.com/api-docs/#/Group/putGroup)
@@ -112,7 +110,6 @@ async fn main() -> Result<(), ()> {
 ### Title
 
 - [getTitles](http://docs.collaboflow.com/api-docs/#/Title/getTitles)
-  - Query `fields` is not supported.
 - [postTitle](http://docs.collaboflow.com/api-docs/#/Title/postTitle)
 - [getTitle](http://docs.collaboflow.com/api-docs/#/Title/getTitle)
 - [putTitle](http://docs.collaboflow.com/api-docs/#/Title/putTitle)

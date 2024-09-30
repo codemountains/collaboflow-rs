@@ -3,9 +3,17 @@ use collaboflow_rs::record::group::NewGroupRecord;
 use collaboflow_rs::request::group::group_one::PutGroupRequest;
 use collaboflow_rs::request::group::groups::PostGroupsRequest;
 use collaboflow_rs::Query;
+use serde::Deserialize;
 use serde_json::json;
 
 mod common;
+
+#[derive(Deserialize, Debug)]
+#[allow(dead_code)]
+struct Group {
+    name: String,
+    code: String,
+}
 
 #[tokio::test]
 async fn groups_works() {
@@ -17,6 +25,15 @@ async fn groups_works() {
     let query = Query::default();
     let client = client_with_password();
     let resp = client.groups.get(query).await;
+    assert_eq!(true, resp.is_ok());
+}
+
+#[tokio::test]
+async fn groups_with_fields_works() {
+    let fields = vec!["name".to_string(), "code".to_string()];
+    let query = Query::builder().fields(fields);
+    let client = client_with_api_key();
+    let resp = client.groups.get_with_fields::<Group>(query).await;
     assert_eq!(true, resp.is_ok());
 }
 
