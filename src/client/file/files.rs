@@ -34,8 +34,6 @@ impl Files {
             Ok(resp) => {
                 let status = resp.status().as_u16();
 
-                println!("{:?}", resp);
-
                 if status == 200 {
                     match resp.bytes().await {
                         Ok(body) => {
