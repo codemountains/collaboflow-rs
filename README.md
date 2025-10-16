@@ -1,9 +1,13 @@
 # Collaboflow REST API Client
 
+![archived](https://img.shields.io/badge/status-archived-red)
 [![Crates.io](https://img.shields.io/crates/v/collaboflow-rs.svg)](https://crates.io/crates/collaboflow-rs)
 [![msrv 1.65.0](https://img.shields.io/badge/msrv-1.65.0-dea584.svg?logo=rust)](https://github.com/rust-lang/rust/releases/tag/1.65.0)
 [![docs.rs](https://docs.rs/collaboflow-rs/badge.svg)](https://docs.rs/collaboflow-rs)
 [![License](https://img.shields.io/github/license/codemountains/collaboflow-rs)](LICENSE)
+
+> [!CAUTION]
+> **This project is archived.**
 
 A [Collaboflow REST API](http://docs.collaboflow.com/api-docs/) client for Rust language.
 
